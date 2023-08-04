@@ -7,6 +7,7 @@ class UserModel {
   String? email;
   String? password;
   String? phoneNumber;
+  String? address;
   String? refreshToken;
   List<Product>? favouriteProducts;
   List<Product>? cartProducts;
@@ -18,6 +19,7 @@ class UserModel {
       this.email,
       this.password,
       this.phoneNumber,
+      this.address,
       this.refreshToken,
       this.favouriteProducts,
       this.cartProducts});
@@ -29,6 +31,7 @@ class UserModel {
     email = json['email'];
     password = json['password'];
     phoneNumber = json['phoneNumber'];
+    address = json['address'];
     refreshToken = json['refreshToken'];
     if (json['favouriteProducts'] != null) {
       favouriteProducts = <Product>[];
@@ -52,6 +55,7 @@ class UserModel {
     data['email'] = email;
     data['password'] = password;
     data['phoneNumber'] = phoneNumber;
+    data['address'] = address;
     // data['refreshToken'] = refreshToken;
     if (favouriteProducts != null) {
       data['favouriteProducts'] =

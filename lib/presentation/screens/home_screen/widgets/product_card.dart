@@ -9,7 +9,7 @@ import '../../../cubits/favourite_products_cubit/favourite_products_cubit.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({Key? key, required this.product}) : super(key: key);
-  final Products product;
+  final Product product;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -29,10 +29,8 @@ class _ProductCardState extends State<ProductCard> {
               ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
-                    widget.product.imageUrl ?? "",
+                    widget.product.image ?? "",
                     fit: BoxFit.cover,
-                    // height: 350,
-                    width: 500,
                   )),
               Positioned(
                 right: 8,
@@ -68,16 +66,16 @@ class _ProductCardState extends State<ProductCard> {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
-                ?.copyWith(color: AppTheme.grey900)),
+                ?.copyWith(color: AppTheme.grey900,overflow: TextOverflow.ellipsis),maxLines: 2,),
         const SizedBox(height: 10),
         Row(
           children: [
-            SvgPicture.asset(widget.product.rating == 5
+            SvgPicture.asset(widget.product.rating!.rate! > 4.5
                 ? "assets/icons/FullStar.svg"
                 : "assets/icons/HalfStar.svg"),
             const SizedBox(width: 8),
             Text(
-              widget.product.rating.toString(),
+              widget.product.rating!.rate.toString(),
               style:
                   AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700),
             ),
@@ -95,7 +93,7 @@ class _ProductCardState extends State<ProductCard> {
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
-                "${widget.product.stock} left in stock",
+                "${widget.product.rating!.count} reviews",
                 style: AppTheme.bodyXSmallSemiBold,
               ),
             )

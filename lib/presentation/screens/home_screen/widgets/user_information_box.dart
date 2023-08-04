@@ -16,6 +16,7 @@ class UserInformationBox extends StatelessWidget {
     final cubit = BlocProvider.of<GetUserInfoCubit>(context);
     // cubit.getUserInfo();
     final user = cubit.currentUser;
+    print(user.imageUrl);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 22),
       child: BlocBuilder<GetUserInfoCubit, GetUserInfoState>(

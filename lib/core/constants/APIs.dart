@@ -4,8 +4,8 @@ class APIs{
   static const loginUserAPI = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$_webAPIToken";
   static const getUserDataAPI = "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=$_webAPIToken";
   static const changePasswordAPI = "https://identitytoolkit.googleapis.com/v1/accounts:update?key=$_webAPIToken";
-  static const getAllProductsWithLimit = "https://dummyjson.com/products?limit=50&skip=1";
-  static const getCategoryProducts = "https://dummyjson.com/products/category/";
+  static const getAllProductsWithLimit = "https://fakestoreapi.com/products?limit=20";
+  static const getCategoryProducts = "https://fakestoreapi.com/products/category/";
   static const searchProducts = "https://dummyjson.com/products/search?q=";
 
 }

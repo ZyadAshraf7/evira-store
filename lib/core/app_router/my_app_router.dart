@@ -10,6 +10,7 @@ import 'package:evira_store/presentation/screens/auth_form/login_screen.dart';
 import 'package:evira_store/presentation/screens/auth_form/register_screen.dart';
 import 'package:evira_store/presentation/screens/bottom_navbar_screen/bottom_navbar_screen.dart';
 import 'package:evira_store/presentation/screens/cart_screen/cart_screen.dart';
+import 'package:evira_store/presentation/screens/cart_screen/checkout_screen.dart';
 import 'package:evira_store/presentation/screens/details_screen/details_screen.dart';
 import 'package:evira_store/presentation/screens/favourite_products_screen/favourite_products_screen.dart';
 import 'package:evira_store/presentation/screens/home_screen/home_screen.dart';
@@ -18,6 +19,8 @@ import 'package:evira_store/presentation/screens/profile_screen/privacy_and_poli
 import 'package:evira_store/presentation/screens/search_screen/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../presentation/screens/payment_screen/payment_screen.dart';
 
 class AppRouter {
   Route? onGenerateRoutes(RouteSettings settings) {
@@ -45,7 +48,7 @@ class AppRouter {
                   child: const OnboardingScreen(),
                 ));
       case RouteNames.detailsScreen:
-        return MaterialPageRoute(builder: (_) => DetailsScreen(product: settings.arguments as Products),settings: settings);
+        return MaterialPageRoute(builder: (_) => DetailsScreen(product: settings.arguments as Product),settings: settings);
       case RouteNames.favouriteProductsScreen:
         return MaterialPageRoute(builder: (_) =>  MultiBlocProvider(
           providers:[
@@ -65,6 +68,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const PrivacyAndPolicy());
       case RouteNames.cartScreen:
         return MaterialPageRoute(builder: (_) => const CartScreen());
+      case RouteNames.checkoutScreen:
+        return MaterialPageRoute(builder: (_) => CheckoutScreen(objects: settings.arguments as List<Object>),settings: settings);
+      case RouteNames.paymentScreen:
+        return MaterialPageRoute(builder: (_) => PaymentScreen());
     }
     return null;
   }

@@ -11,12 +11,12 @@ class SearchProductCubit extends Cubit<SearchProductState> {
   SearchProductCubit() : super(SearchProductInitial());
 
   TextEditingController searchController = TextEditingController();
-   List<Products> searchedProducts=[];
+   List<Product> searchedProducts=[];
   SearchProductRepository searchProductRepository = SearchProductRepository();
   fetchSearchedProducts(String searchKeyword )async{
     emit(SearchProductLoading());
     try{
-      final responseData = await searchProductRepository.searchProduct(searchKeyword);
+      /*final responseData = await searchProductRepository.searchProduct(searchKeyword);
       final response = Product.fromJson(responseData);
       searchedProducts = response.products!;
       // searchedProducts = productsResponse.map((e) => Products.fromJson(e)).toList();
@@ -26,7 +26,7 @@ class SearchProductCubit extends Cubit<SearchProductState> {
       }else{
         emit(SearchProductFound());
       }
-
+*/
     }catch(e){
       emit(SearchProductError());
       print(e.toString());

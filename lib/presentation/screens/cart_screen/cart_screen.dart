@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../core/app_router/route_names.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../data/models/user.dart';
+import '../../cubits/get_user_info/get_user_info_cubit.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -35,6 +38,8 @@ class CartScreen extends StatelessWidget {
               return Center(
                 child: loadingSpinner(),
               );
+            }else if(state is CartProductsEmpty){
+              return Center(child: Text("Cart is empty"),);
             }
             return BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
@@ -73,11 +78,8 @@ class CartScreen extends StatelessWidget {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: Text("Product is Added to Checkout"),
-                                  duration: Duration(milliseconds: 500),
-                                ));
+                                final UserModel user = BlocProvider.of<GetUserInfoCubit>(context).currentUser;
+                                Navigator.of(context).pushNamed(RouteNames.checkoutScreen,arguments: [cubit.cartList,user]);
                               },
                               style: ButtonStyle(
                                 elevation:

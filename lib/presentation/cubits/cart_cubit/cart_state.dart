@@ -6,6 +6,7 @@ abstract class CartState {}
 class CartInitial extends CartState {}
 class CartProductsLoading extends CartState {}
 class CartProductsDone extends CartState {}
+class CartProductsEmpty extends CartState {}
 class CartProductsFailed extends CartState {}
 class IncrementQuantity extends CartState {}
 class DecrementQuantity extends CartState {}

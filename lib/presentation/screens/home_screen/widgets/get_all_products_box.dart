@@ -11,7 +11,7 @@ class GetAllProductsBox extends StatelessWidget {
   });
 
   // final HomeCubit cubit;
-  final List<Products> productsList;
+  final List<Product> productsList;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,6 +21,7 @@ class GetAllProductsBox extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 16,
           mainAxisSpacing: 24,
+          childAspectRatio: 0.5
         ),
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),

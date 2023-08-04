@@ -10,13 +10,13 @@ class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {
   FavouriteProductsCubit() : super(FavouriteProductsInitial());
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  List<Products>favouriteProducts = [];
+  List<Product>favouriteProducts = [];
   fetchUserFavouriteProducts()async{
     emit(FavouriteProductsLoading());
     try{
       final document = await _firestore.collection("users").doc(UserPreferences.getUserEmail()).get();
       List<dynamic> favouriteProductResponse = document.get("favouriteProducts");
-      favouriteProducts = favouriteProductResponse.map((e) => Products.fromJson(e)).toList();
+      favouriteProducts = favouriteProductResponse.map((e) => Product.fromJson(e)).toList();
       if(favouriteProducts.isNotEmpty){
         emit(FavouriteProductsDone());
       }
@@ -26,7 +26,7 @@ class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {
     }
   }
 
-  addProductToFavourite(Products product){
+  addProductToFavourite(Product product){
     favouriteProducts.insert(0, product);
     emit(AddProductToFavourite());
     _firestore
@@ -36,7 +36,7 @@ class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {
       'favouriteProducts': FieldValue.arrayUnion([product.toJson()])
     });
   }
-  removeProductFromFavourite(Products product){
+  removeProductFromFavourite(Product product){
     favouriteProducts.removeWhere((element) => element.id==product.id);
     emit(RemoveProductToFavourite());
     _firestore
@@ -46,7 +46,7 @@ class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {
       'favouriteProducts': FieldValue.arrayRemove([product.toJson()])
     });
   }
-  toggleProductsToFavorite(Products product)async{
+  toggleProductsToFavorite(Product product)async{
     try {
       if ((checkIfProductFavourite(product))) {
         //PRODUCT EXIST
@@ -59,7 +59,7 @@ class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {
       print(e.toString());
     }
   }
-   bool checkIfProductFavourite(Products product){
+   bool checkIfProductFavourite(Product product){
     try {
       /*final document = await _firestore.collection('users').doc(
           UserPreferences.getUserEmail()).get();

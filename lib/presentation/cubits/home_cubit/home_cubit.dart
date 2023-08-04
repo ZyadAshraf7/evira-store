@@ -15,11 +15,10 @@ class HomeCubit extends Cubit<HomeState> {
   int selectedCategory = 0;
   List<String> categoriesList = [
     "All",
-    "Smartphones",
-    "Laptops",
-    "Fragrances",
-    "Skincare",
-    "Groceries"
+    "electronics",
+    "jewelery",
+    "men's clothing",
+    "women's clothing"
   ];
 
   selectCategory(int index) async {
@@ -50,30 +49,28 @@ class HomeCubit extends Cubit<HomeState> {
     emit(SelectCategoryLoading());
     GetCategoryProductsRepository categoryProductsRepository =
         GetCategoryProductsRepository();
-    final data = await categoryProductsRepository.getCategoryProducts(categoriesList[index]);
-    final responseData = Product.fromJson(data);
-    allProducts = responseData.products ?? [];
+    final List<dynamic> data = await categoryProductsRepository.getCategoryProducts(categoriesList[index]);
+    allProducts = data.map((e) => Product.fromJson(e)).toList();
     if (allProducts.isNotEmpty) {
       emit(SelectCategoryDone());
     }
   }
 
-  List<Products> allProducts = [];
-  List<Products> smartphonesProducts = [];
+  List<Product> allProducts = [];
   GetAllProductsWithLimitRepository repository =
       GetAllProductsWithLimitRepository();
 
   fetchAllProductsWithLimit() async {
     emit(GetAllProductsWithLimitsLoading());
     try {
-      final data = await repository.getAllProductsWithLimits();
-      final responseData = Product.fromJson(data);
-      allProducts = responseData.products ?? [];
+      final List<dynamic> data = await repository.getAllProductsWithLimits();
+      allProducts = data.map((e) => Product.fromJson(e)).toList();
       if (allProducts.isNotEmpty) {
         emit(GetAllProductsWithLimitsDone());
       }
     } catch (e) {
       emit(GetAllProductsWithLimitsFailed());
+      print(e.toString());
     }
   }
 

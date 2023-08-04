@@ -1,78 +1,31 @@
 class Product {
-  List<Products>? products;
-  int? total;
-  int? skip;
-  int? limit;
-
-  Product({this.products, this.total, this.skip, this.limit});
-
-  Product.fromJson(Map<String, dynamic> json) {
-    if (json['products'] != null) {
-      products = <Products>[];
-      json['products'].forEach((v) {
-        products!.add(new Products.fromJson(v));
-      });
-    }
-    total = json['total'];
-    skip = json['skip'];
-    limit = json['limit'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
-    }
-    data['total'] = this.total;
-    data['skip'] = this.skip;
-    data['limit'] = this.limit;
-    return data;
-  }
-}
-
-class Products {
   int? id;
   String? title;
   String? description;
-  int? price;
-  double? discountPercentage;
-  double? rating;
-  int? stock;
-  String? brand;
+  num? price;
+  Rating? rating;
   String? category;
-  String? thumbnail;
-  List<String>? images;
-  String? imageUrl;
+  String? image;
   int? quantity;
 
-  Products(
+  Product(
       {this.id,
         this.title,
         this.description,
         this.price,
-        this.discountPercentage,
         this.rating,
-        this.stock,
-        this.brand,
         this.category,
-        this.thumbnail,
-        this.images,
-        this.imageUrl,this.quantity=1});
+        this.image,this.quantity=1});
 
-  Products.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];
-    price = json['price'];
-    discountPercentage = json['discountPercentage'] is int ? (json['discountPercentage'] as int).toDouble() : json['discountPercentage'];
-    rating =  json['rating'] is int ? (json['rating'] as int).toDouble() : json['rating'];
-
-    stock = json['stock'];
-    brand = json['brand'];
+    price = json['price'].toDouble();
+    rating =  rating =
+    json['rating'] != null ? Rating.fromJson(json['rating']) : null;
     category = json['category'];
-    thumbnail = json['thumbnail'];
-    images = json['images'].cast<String>();
-    imageUrl = json['thumbnail'];
+    image = json['image'];
     quantity = json['quantity']??1;
   }
 
@@ -82,15 +35,31 @@ class Products {
     data['title'] = this.title;
     data['description'] = this.description;
     data['price'] = this.price;
-    data['discountPercentage'] = this.discountPercentage;
-    data['rating'] = this.rating;
-    data['stock'] = this.stock;
-    data['brand'] = this.brand;
+    if (this.rating != null) {
+      data['rating'] = this.rating!.toJson();
+    }
     data['category'] = this.category;
-    data['thumbnail'] = this.thumbnail;
-    data['images'] = this.images;
-    data['thumbnail'] = this.imageUrl;
+    data['image'] = this.image;
     data['quantity'] = this.quantity??1;
+    return data;
+  }
+}
+
+class Rating {
+  double? rate;
+  int? count;
+
+  Rating({this.rate, this.count});
+
+  Rating.fromJson(Map<String, dynamic> json) {
+    rate = json['rate'].toDouble();
+    count = json['count'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['rate'] = this.rate;
+    data['count'] = this.count;
     return data;
   }
 }

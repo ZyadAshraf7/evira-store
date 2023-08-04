@@ -103,7 +103,9 @@ class HomeScreen extends StatelessWidget {
             }
             /*if (state is GetAllProductsWithLimitsDone || state is SelectCategoryDone) {
               return GetAllProductsBox(cubit: cubit);
-            }*/else{
+            }*/else if (state is GetAllProductsWithLimitsFailed || state is SelectCategoryFailed){
+              return Text("Somthing Went Wrong");
+            }else{
               return GetAllProductsBox(productsList:cubit.allProducts);
             }
           },

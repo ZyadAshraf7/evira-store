@@ -7,14 +7,16 @@ import '../../../../data/models/product.dart';
 import '../../../cubits/cart_cubit/cart_cubit.dart';
 
 class CartProductCard extends StatelessWidget {
-  const CartProductCard({Key? key, required this.product}) : super(key: key);
+  const CartProductCard({Key? key, required this.product,this.isCheckout,this.checkoutQuantity}) : super(key: key);
 
-  final Products product;
+  final Product product;
+  final bool ?isCheckout;
+  final int ? checkoutQuantity;
   @override
   Widget build(BuildContext context) {
     final cartCubit = BlocProvider.of<CartCubit>(context);
     return Card(
-      elevation: 2,
+      elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
       child: Container(
         padding: const EdgeInsets.all(20),
@@ -24,7 +26,7 @@ class CartProductCard extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.network(product.imageUrl!,height: 120,width: 120,fit: BoxFit.cover,),
+              child: Image.network(product.image!,height: 120,width: 120,fit: BoxFit.cover,),
             ),
             const SizedBox(width: 16),
             Container(
@@ -34,21 +36,21 @@ class CartProductCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(child: Text(product.title!,overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppTheme.grey900))),
-                        GestureDetector(onTap:()=> cartCubit.removeProductFromCart(product),
-                            child: SvgPicture.asset("assets/icons/Delete.svg")),
+                        Expanded(child: Text(product.title!,overflow: TextOverflow.ellipsis,maxLines:2,style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppTheme.grey900))),
+                        (isCheckout==null||isCheckout==false)?GestureDetector(onTap:()=> cartCubit.removeProductFromCart(product),
+                            child: SvgPicture.asset("assets/icons/Delete.svg")):const SizedBox(),
 
                       ],
                     ),
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        SvgPicture.asset(product.rating == 5
+                        SvgPicture.asset(product.rating!.rate! > 4.5
                             ? "assets/icons/FullStar.svg"
                             : "assets/icons/HalfStar.svg"),
                         const SizedBox(width: 8),
                         Text(
-                          product.rating.toString(),
+                          product.rating!.rate.toString(),
                           style:
                           AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700),
                         ),
@@ -66,7 +68,7 @@ class CartProductCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
-                            "${product.stock} left in stock",
+                            "${product.rating!.count} reviews",
                             style: AppTheme.bodyXSmallSemiBold,
                           ),
                         ),
@@ -78,6 +80,7 @@ class CartProductCard extends StatelessWidget {
                       children: [
                         Text("\$${product.price?.toDouble()}",style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppTheme.grey900)),
                         const SizedBox(width: 10),
+                        (isCheckout==null||isCheckout==false)?
                         Expanded(
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 8),
@@ -90,14 +93,20 @@ class CartProductCard extends StatelessWidget {
                               children: [
                                 GestureDetector(onTap: ()=>cartCubit.decrementProductQuantity(product)
                                     ,child: SvgPicture.asset("assets/icons/minus.svg")),
-                                const SizedBox(width: 16),
                                 Text(product.quantity.toString(),style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppTheme.primary500)),
-                                const SizedBox(width: 20),
                                 GestureDetector(onTap: ()=>cartCubit.incrementProductQuantity(product)
                                     ,child: SvgPicture.asset("assets/icons/plus.svg")),
                               ],
                             ),
                           ),
+                        ):Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: const Color(0xffF3F3F3),
+                            shape: BoxShape.circle
+                          ),
+                          child: Text(checkoutQuantity.toString()??0.toString(),style: AppTheme.bodyMediumBold.copyWith(color: AppTheme.primary500)),
                         ),
                       ],
                     )
