@@ -124,7 +124,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Amount",style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700)),
-                          Text("\$${BlocProvider.of<CartCubit>(context).totalPrice.toString()}",style: AppTheme.bodyLargeSemiBold.copyWith(color: AppTheme.grey800))
+                          Text("\$${BlocProvider.of<CartCubit>(context).totalPrice.toStringAsFixed(2)}",style: AppTheme.bodyLargeSemiBold.copyWith(color: AppTheme.grey800))
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -132,7 +132,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Shipping",style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700)),
-                          Text("\$$shippingFees",style: AppTheme.bodyLargeSemiBold.copyWith(color: AppTheme.grey800))
+                          Text("\$${shippingFees.toStringAsFixed(2)}",style: AppTheme.bodyLargeSemiBold.copyWith(color: AppTheme.grey800))
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -140,7 +140,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Promo Code",style: AppTheme.bodyMediumMedium.copyWith(color: Colors.green)),
-                          Text("\$-$discount",style: AppTheme.bodyLargeBold.copyWith(color: Colors.green))
+                          Text("\$-${discount.toStringAsFixed(2)}",style: AppTheme.bodyLargeBold.copyWith(color: Colors.green))
                         ],
                       ):const SizedBox(),
                       validPromoCode==true?const SizedBox(height: 20):const SizedBox(),
@@ -148,7 +148,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text("Total",style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700)),
-                          Text("\$${(BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount)}",style: AppTheme.bodyLargeSemiBold.copyWith(color: AppTheme.grey800))
+                          Text("\$${(BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount).toStringAsFixed(2)}",style: AppTheme.bodyLargeSemiBold.copyWith(color: AppTheme.grey800))
                         ],
                       ),
                     ],

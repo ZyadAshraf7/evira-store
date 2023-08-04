@@ -1,3 +1,4 @@
+import 'package:evira_store/core/app_router/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -13,6 +14,7 @@ class AddressBox extends StatelessWidget {
       elevation: 4,
       child: InkWell(
         onTap: (){
+          Navigator.of(context).pushNamed(RouteNames.selectLocationScreen);
         },
         borderRadius: BorderRadius.circular(24),
         child: Padding(
@@ -30,7 +32,7 @@ class AddressBox extends StatelessWidget {
                     children: [
                       Text("Home",style: Theme.of(context).textTheme.titleLarge),
                       const SizedBox(height: 8),
-                      Text("61480 Sunbrook Park, PC 5679",style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700))
+                      Text(address,style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700))
                     ],
                   ),
                 ],

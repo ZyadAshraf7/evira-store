@@ -17,6 +17,7 @@ import 'package:evira_store/presentation/screens/home_screen/home_screen.dart';
 import 'package:evira_store/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:evira_store/presentation/screens/profile_screen/privacy_and_policy.dart';
 import 'package:evira_store/presentation/screens/search_screen/search_screen.dart';
+import 'package:evira_store/presentation/screens/select_location_screen/select_location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -72,6 +73,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CheckoutScreen(objects: settings.arguments as List<Object>),settings: settings);
       case RouteNames.paymentScreen:
         return MaterialPageRoute(builder: (_) => PaymentScreen());
+      case RouteNames.selectLocationScreen:
+        return MaterialPageRoute(builder: (_) => const SelectLocationScreen());
     }
     return null;
   }
