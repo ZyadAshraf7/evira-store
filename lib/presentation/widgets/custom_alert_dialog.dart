@@ -7,7 +7,9 @@ Widget customAlertDialog(
     {required BuildContext context,
       required String title,
       required String description,
-      required String imagePath}){
+      required String imagePath,
+      bool? hasLoading,
+    Widget ?body}){
   return AlertDialog(
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(24.0))),
@@ -21,7 +23,8 @@ Widget customAlertDialog(
           const SizedBox(height: 16),
           Text(description,style: AppTheme.bodyLargeRegular.copyWith(color: AppTheme.grey900),textAlign: TextAlign.center,),
           const SizedBox(height: 32),
-          loadingSpinner()
+          (hasLoading==null || hasLoading==true)?loadingSpinner():
+          (body!=null)?body:const SizedBox()
         ],
       ),
   );

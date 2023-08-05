@@ -121,6 +121,7 @@ class CompleteUserRegister extends StatelessWidget {
                                     showDialog(
                                       context: context,
                                       builder: (context) => customAlertDialog(
+                                        hasLoading: true,
                                           context: context,
                                           title: "Congratulations!",
                                           description:

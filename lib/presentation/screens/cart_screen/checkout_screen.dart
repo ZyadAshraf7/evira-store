@@ -1,10 +1,12 @@
 import 'package:evira_store/core/app_router/route_names.dart';
 import 'package:evira_store/core/constants/promo_codes.dart';
+import 'package:evira_store/presentation/cubits/bottom_navbar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:evira_store/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:evira_store/presentation/screens/cart_screen/widgets/addressBox.dart';
 import 'package:evira_store/presentation/screens/cart_screen/widgets/cart_product_card.dart';
 import 'package:evira_store/presentation/screens/cart_screen/widgets/user_information_for_checkout.dart';
+import 'package:evira_store/presentation/widgets/custom_alert_dialog.dart';
 import 'package:evira_store/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -180,6 +182,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Expanded(child: CustomButton(onTap: (){
                     // Navigator.of(context).pushNamed(RouteNames.paymentScreen);
+                    showDialog(context: context, builder: (context)=>
+                        customAlertDialog(context: context, title: "Order Successful!",
+                          description: "You have successfully made order", imagePath: "assets/images/cart_icon.png",hasLoading: false,
+                          body: Row(
+                            children: [
+                              Expanded(child: CustomButton(onTap: (){
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                                context.read<BottomNavBarCubit>().navigateScreens(2);
+                              }, title: "View Order"))
+                            ],
+                          )
+                        ));
                   }, title: "Place an Order")),
                 ],
               ),
