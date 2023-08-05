@@ -41,11 +41,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    UserModel user = widget.objects[1] as UserModel;
+    // UserModel user = widget.objects[1] as UserModel;
     List<Product> cartList = widget.objects[0] as List<Product>;
     double shippingFees = 25;
+/*
+    print(cartList.first.title);*/
+    setState(() {
+
+    });
+    final UserModel user = BlocProvider.of<GetUserInfoCubit>(context).currentUser;
     print(user.email);
-    print(cartList.first.title);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -62,7 +67,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Text("Shipping Address",style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 24),
               (user.address!=null&&user.address!.isNotEmpty)?
-                  AddressBox(address: user.address!):
+                  BlocBuilder<GetUserInfoCubit,GetUserInfoState>(builder: (context,state){
+                    return AddressBox();
+                  },):
               Center(child: TextButton(onPressed: (){}, child: Text("+ Add Address",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppTheme.primary500)))),
               const SizedBox(height: 24),
               Text("Your Information",style: Theme.of(context).textTheme.headlineSmall),
@@ -81,6 +88,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Expanded(
                       child: TextFormField(
+                        onFieldSubmitted: (v){
+                          setState(() {
+                            bool valid = promoCodes.containsKey(promoController.text);
+                            if(valid){
+                              validPromoCode = true;
+                              double? percent = promoCodes[promoController.text];
+                              // final newPercent = 100 - percent!;
+                              discount = BlocProvider.of<CartCubit>(context).totalPrice*(percent!/100);
+                            }else{
+                              validPromoCode = false;
+                            }
+                          });
+                        },
                         controller: promoController,
                     decoration: const InputDecoration(
                       hintText: "Enter Promo Code"
@@ -159,8 +179,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Row(
                 children: [
                   Expanded(child: CustomButton(onTap: (){
-                    Navigator.of(context).pushNamed(RouteNames.paymentScreen);
-                  }, title: "Continue to Payment")),
+                    // Navigator.of(context).pushNamed(RouteNames.paymentScreen);
+                  }, title: "Place an Order")),
                 ],
               ),
               const SizedBox(height: 12)

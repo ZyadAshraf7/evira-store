@@ -1,12 +1,13 @@
 import 'package:evira_store/core/app_router/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/theme/app_theme.dart';
+import '../../../cubits/get_user_info/get_user_info_cubit.dart';
 
 class AddressBox extends StatelessWidget {
-  const AddressBox({Key? key, required this.address}) : super(key: key);
-  final String address;
+  const AddressBox({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,13 +33,13 @@ class AddressBox extends StatelessWidget {
                     children: [
                       Text("Home",style: Theme.of(context).textTheme.titleLarge),
                       const SizedBox(height: 8),
-                      Text(address,style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700))
+                      SizedBox(width:200,child: Text(BlocProvider.of<GetUserInfoCubit>(context).currentUser.address??"",maxLines: 2,softWrap:true,overflow: TextOverflow.ellipsis,style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700)))
                     ],
                   ),
                 ],
               ),
               InkWell(onTap: (){
-
+                Navigator.of(context).pushNamed(RouteNames.selectLocationScreen);
               },child: SvgPicture.asset("assets/icons/Edit_outline.svg")),
             ],
           ),

@@ -55,7 +55,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   google_maps_flutter: ^2.4.0
   geocoding: ^2.1.0
-
+  flutter_google_places_hoc081098: ^1.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

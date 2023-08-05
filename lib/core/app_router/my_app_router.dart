@@ -28,13 +28,13 @@ class AppRouter {
     switch (settings.name) {
       case RouteNames.bottomNavBarScreen:
         return MaterialPageRoute(
-          builder: (_) => MultiBlocProvider(
+          builder: (_) => /*MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => GetUserInfoCubit()..getUserInfo()),
+
               // BlocProvider(create: (_)=>GetAllProductsWithLimitsCubit()..fetchAllProductsWithLimit()),
             ],
-            child: const BottomNavBarScreen(),
-          ),
+            child:*/ const BottomNavBarScreen(),
+          // ),
         );
       case RouteNames.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());

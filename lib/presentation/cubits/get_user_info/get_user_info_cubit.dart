@@ -13,7 +13,7 @@ class GetUserInfoCubit extends Cubit<GetUserInfoState> {
   UserModel currentUser = UserModel();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  String updatedAddress="";
   Future<void> getUserInfo() async {
     emit(GetUserInfoLoading());
     try {
@@ -29,5 +29,14 @@ class GetUserInfoCubit extends Cubit<GetUserInfoState> {
       emit(GetUserInfoFailed());
       print(e.toString());
     }
+  }
+  Future<void> updateUserAddress(String newAddress)async{
+    await _firestore.collection("users").doc(UserPreferences.getUserEmail()).update(
+        {
+          "address":newAddress,
+        });
+    final data = await _firestore.collection("users").doc(UserPreferences.getUserEmail()).get();
+    currentUser = UserModel.fromJson(data.data()!);
+    emit(UpdateUserAddress());
   }
 }
