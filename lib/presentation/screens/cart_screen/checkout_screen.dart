@@ -3,6 +3,7 @@ import 'package:evira_store/core/constants/promo_codes.dart';
 import 'package:evira_store/presentation/cubits/bottom_navbar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:evira_store/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
+import 'package:evira_store/presentation/cubits/orders_cubit/orders_cubit.dart';
 import 'package:evira_store/presentation/screens/cart_screen/widgets/addressBox.dart';
 import 'package:evira_store/presentation/screens/cart_screen/widgets/cart_product_card.dart';
 import 'package:evira_store/presentation/screens/cart_screen/widgets/user_information_for_checkout.dart';
@@ -48,9 +49,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     double shippingFees = 25;
 /*
     print(cartList.first.title);*/
-    setState(() {
-
-    });
     final UserModel user = BlocProvider.of<GetUserInfoCubit>(context).currentUser;
     print(user.email);
     return Scaffold(
@@ -180,17 +178,26 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  Expanded(child: CustomButton(onTap: (){
+                  Expanded(child: CustomButton(onTap: ()async{
                     // Navigator.of(context).pushNamed(RouteNames.paymentScreen);
+                    await BlocProvider.of<OrdersCubit>(context).addOrder(
+                        orderProducts: cartList,
+                        user: user,
+                        subTotal: BlocProvider.of<CartCubit>(context).totalPrice,
+                        discount: discount,
+                        shipping: shippingFees,
+                        total: BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount
+                    );
                     showDialog(context: context, builder: (context)=>
                         customAlertDialog(context: context, title: "Order Successful!",
                           description: "You have successfully made order", imagePath: "assets/images/cart_icon.png",hasLoading: false,
                           body: Row(
                             children: [
-                              Expanded(child: CustomButton(onTap: (){
+                              Expanded(child: CustomButton(onTap: ()async{
+
+                               /* Navigator.of(context).pop();
                                 Navigator.of(context).pop();
-                                Navigator.of(context).pop();
-                                context.read<BottomNavBarCubit>().navigateScreens(2);
+                                context.read<BottomNavBarCubit>().navigateScreens(2);*/
                               }, title: "View Order"))
                             ],
                           )

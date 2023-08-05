@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/app_router/my_app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'data/shared_preference/user_preference.dart';
+import 'presentation/cubits/orders_cubit/orders_cubit.dart';
 
 class EviraStore extends StatelessWidget {
   const EviraStore({Key? key,this.appRouter,this.initialRoute}) : super(key: key);
@@ -35,6 +36,7 @@ class EviraStore extends StatelessWidget {
         BlocProvider(create: (context) => FavouriteProductsCubit()..fetchUserFavouriteProducts()),
         BlocProvider(create: (_)=>CartCubit()),
         BlocProvider(create: (_) => GetUserInfoCubit()..getUserInfo()),
+        BlocProvider(create: (_)=>OrdersCubit()),
 
       ],
       child: GestureDetector(

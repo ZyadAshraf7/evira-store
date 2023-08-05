@@ -11,11 +11,32 @@ part 'orders_state.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit() : super(OrdersInitial());
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  addOrder(List<Product>orderProducts , UserModel user){
-    final DocumentReference orderDoc = _firestore.collection("order").doc(UserPreferences.getUserEmail()).collection("userOrders").doc();
-    OrderModel order =
-        OrderModel(orderId: orderDoc.id, orderProducts: orderProducts, user: user);
-    orderDoc.set(order.toJson());
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> addOrder(
+      {required List<Product> orderProducts,
+      required UserModel user,
+      required double subTotal,
+      required double shipping,
+      required double discount,
+      required double total}) async {
+    try {
+      final DocumentReference orderDoc = _firestore
+          .collection("orders")
+          .doc(UserPreferences.getUserEmail())
+          .collection("userOrders")
+          .doc();
+      OrderModel order = OrderModel(
+          orderId: orderDoc.id,
+          orderProducts: orderProducts,
+          user: user,
+          subTotal: subTotal,
+          shipping: shipping,
+          discount: discount,
+          total: total);
+      await orderDoc.set(order.toJson());
+    }catch(e){
+      print(e.toString());
+    }
   }
 }

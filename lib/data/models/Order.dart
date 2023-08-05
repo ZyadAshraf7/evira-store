@@ -6,15 +6,19 @@ class OrderModel {
   String? orderId;
   List<Product>? orderProducts;
   UserModel? user;
-  int ?subTotal;
-  int ?shipping;
-  int ?discount;
-  int ?total;
+  double ?subTotal;
+  double ?shipping;
+  double ?discount;
+  double ?total;
 
   OrderModel({
     required this.orderId,
     required this.orderProducts,
     required this.user,
+    required this.subTotal,
+    required this.shipping,
+    required this.discount,
+    required this.total,
   });
 
   OrderModel.fromJson(Map<String,dynamic>json){
@@ -28,9 +32,9 @@ class OrderModel {
   }
   Map<String,dynamic> toJson(){
     Map<String,dynamic> data = <String, dynamic>{};
-    data["user"] = user;
+    data["user"] = user?.toJson();
     data["orderId"] = orderId;
-    data["orderProducts"] = orderProducts;
+    data["orderProducts"] = orderProducts?.map((e) => e.toJson());
     data["subTotal"] = subTotal;
     data["shipping"] = shipping;
     data["discount"] = discount;
