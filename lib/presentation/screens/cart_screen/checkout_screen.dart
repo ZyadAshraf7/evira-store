@@ -13,7 +13,7 @@ import 'package:evira_store/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:timezone/standalone.dart' as tz;
 import '../../../core/theme/app_theme.dart';
 import '../../../data/models/product.dart';
 import '../../../data/models/user.dart';
@@ -181,25 +181,31 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Expanded(child: CustomButton(onTap: ()async{
                     // Navigator.of(context).pushNamed(RouteNames.paymentScreen);
-                    final subTotal = BlocProvider.of<CartCubit>(context).totalPrice;
+                    BlocProvider.of<OrdersCubit>(context).fetchUserOrders();
+                    /*final subTotal = BlocProvider.of<CartCubit>(context).totalPrice;
                     final total = BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount;
                     OrderModel order = OrderModel(orderProducts: cartList, userName: user.name, userEmail:
                     user.email, userPhoneNumber: user.phoneNumber, subTotal: subTotal, shipping: shippingFees, discount: discount, total: total);
-                    await BlocProvider.of<OrdersCubit>(context).addOrder(order);
-                    showDialog(context: context, builder: (context)=>
-                        customAlertDialog(context: context, title: "Order Successful!",
-                          description: "You have successfully made order", imagePath: "assets/images/cart_icon.png",hasLoading: false,
-                          body: Row(
-                            children: [
-                              Expanded(child: CustomButton(onTap: ()async{
-
-                               /* Navigator.of(context).pop();
-                                Navigator.of(context).pop();
-                                context.read<BottomNavBarCubit>().navigateScreens(2);*/
-                              }, title: "View Order"))
-                            ],
-                          )
-                        ));
+                    await BlocProvider.of<OrdersCubit>(context).addOrder(order).then((value){
+                      showDialog(context: context, builder: (context)=>
+                          customAlertDialog(context: context, title: "Order Successful!",
+                              description: "You have successfully made order", imagePath: "assets/images/cart_icon.png",hasLoading: false,
+                              body: Row(
+                                children: [
+                                  Expanded(child: CustomButton(onTap: ()async{
+                                     *//*Navigator.of(context).pop();
+                                       Navigator.of(context).pop();
+                                       context.read<BottomNavBarCubit>().navigateScreens(2);*//*
+                                  }, title: "View Order"),
+                                  )
+                                ],
+                              )
+                          ));
+                    }).onError((error, stackTrace) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something Went Wrong"),backgroundColor: AppTheme.error));
+                      print(error.toString());
+                    });
+*/
                   }, title: "Place an Order")),
                 ],
               ),

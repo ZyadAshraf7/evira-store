@@ -26,6 +26,9 @@ class BottomNavBarCubit extends Cubit<BottomNavBarState> {
     if(index == 1){
       emit(CartIndexScreen());
     }
+    else if(index == 2){
+      emit(OrdersIndexScreen());
+    }
 
   }
 }

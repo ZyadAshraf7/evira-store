@@ -1,6 +1,7 @@
 import 'package:evira_store/core/theme/app_theme.dart';
 import 'package:evira_store/presentation/cubits/bottom_navbar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:evira_store/presentation/cubits/cart_cubit/cart_cubit.dart';
+import 'package:evira_store/presentation/cubits/orders_cubit/orders_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +16,9 @@ class BottomNavBarScreen extends StatelessWidget {
       builder: (context, state) {
         if(state is CartIndexScreen){
           BlocProvider.of<CartCubit>(context).fetchUserCart();
+        }
+        if(state is OrdersIndexScreen){
+          // BlocProvider.of<OrdersCubit>(context).fetch
         }
         return Scaffold(
           body: cubit.screens[cubit.currentPage],

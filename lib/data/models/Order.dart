@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evira_store/data/models/product.dart';
 import 'package:evira_store/data/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class OrderModel {
   String? orderId;
-  List<Product>? orderProducts;
+  List<dynamic>? orderProducts;
   String? userName;
   String? userEmail;
   String? userPhoneNumber;
@@ -12,6 +13,7 @@ class OrderModel {
   double ?shipping;
   double ?discount;
   double ?total;
+  Timestamp? orderDate;
 
   OrderModel({
     this.orderId,
@@ -23,6 +25,7 @@ class OrderModel {
     required this.shipping,
     required this.discount,
     required this.total,
+    this.orderDate
   });
 
   OrderModel.fromJson(Map<String,dynamic>json){
@@ -30,11 +33,12 @@ class OrderModel {
     userEmail = json["userEmail"];
     userPhoneNumber = json["userPhoneNumber"];
     orderId = json["orderId"];
-    orderProducts = json["orderProducts"];
+    orderProducts = json["orderProducts"].map((e)=>Product.fromJson(e)).toList();
     subTotal = json["subTotal"];
     shipping = json["shipping"];
     discount = json["discount"];
     total = json["total"];
+    orderDate = json["orderDate"];
   }
   Map<String,dynamic> toJson(){
     Map<String,dynamic> data = <String, dynamic>{};
@@ -47,6 +51,7 @@ class OrderModel {
     data["shipping"] = shipping;
     data["discount"] = discount;
     data["total"] = total;
+    data["orderDate"] = orderDate;
     return data;
   }
 }

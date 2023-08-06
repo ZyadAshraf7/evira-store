@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evira_store/data/models/Order.dart';
@@ -29,10 +31,33 @@ class OrdersCubit extends Cubit<OrdersState> {
           subTotal: orderModel.subTotal,
           shipping: orderModel.shipping,
           discount: orderModel.discount,
-          total: orderModel.total);
+          total: orderModel.total,
+        orderDate: Timestamp.now(),
+      );
       await orderDoc.set(order.toJson());
     }catch(e){
       print(e.toString());
+    }
+  }
+
+  Future<List<OrderModel>> fetchUserOrders()async{
+    try {
+      List<OrderModel> userOrders = [];
+      QuerySnapshot snapshot = await _firestore.collection("orders").doc(
+          UserPreferences.getUserEmail()).collection("userOrders").get();
+      // log(snapshot.docs.first.data().toString());
+      for (var doc in snapshot.docs) {
+        userOrders.add(OrderModel.fromJson(doc.data() as Map<String, dynamic>));
+      }
+      if(userOrders.isNotEmpty) {
+        userOrders.sort((a, b) => b.orderDate!.compareTo(a.orderDate!));
+        return userOrders;
+      }else{
+        return userOrders;
+      }
+    }catch(e){
+      print(e.toString());
+      return [];
     }
   }
 }

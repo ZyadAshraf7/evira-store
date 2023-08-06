@@ -6,3 +6,4 @@ abstract class BottomNavBarState {}
 class BottomNavBarInitial extends BottomNavBarState {}
 class BottomNavBarScreenChange extends BottomNavBarState {}
 class CartIndexScreen extends BottomNavBarState {}
+class OrdersIndexScreen extends BottomNavBarState {}
