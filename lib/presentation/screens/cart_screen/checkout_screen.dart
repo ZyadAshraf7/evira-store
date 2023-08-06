@@ -181,8 +181,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Expanded(child: CustomButton(onTap: ()async{
                     // Navigator.of(context).pushNamed(RouteNames.paymentScreen);
-                    BlocProvider.of<OrdersCubit>(context).fetchUserOrders();
-                    /*final subTotal = BlocProvider.of<CartCubit>(context).totalPrice;
+                    final subTotal = BlocProvider.of<CartCubit>(context).totalPrice;
                     final total = BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount;
                     OrderModel order = OrderModel(orderProducts: cartList, userName: user.name, userEmail:
                     user.email, userPhoneNumber: user.phoneNumber, subTotal: subTotal, shipping: shippingFees, discount: discount, total: total);
@@ -193,9 +192,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               body: Row(
                                 children: [
                                   Expanded(child: CustomButton(onTap: ()async{
-                                     *//*Navigator.of(context).pop();
+                                     Navigator.of(context).pop();
                                        Navigator.of(context).pop();
-                                       context.read<BottomNavBarCubit>().navigateScreens(2);*//*
+                                       context.read<BottomNavBarCubit>().navigateScreens(2);
                                   }, title: "View Order"),
                                   )
                                 ],
@@ -205,7 +204,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something Went Wrong"),backgroundColor: AppTheme.error));
                       print(error.toString());
                     });
-*/
                   }, title: "Place an Order")),
                 ],
               ),

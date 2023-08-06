@@ -18,7 +18,7 @@ class BottomNavBarScreen extends StatelessWidget {
           BlocProvider.of<CartCubit>(context).fetchUserCart();
         }
         if(state is OrdersIndexScreen){
-          // BlocProvider.of<OrdersCubit>(context).fetch
+          BlocProvider.of<OrdersCubit>(context).fetchUserOrders();
         }
         return Scaffold(
           body: cubit.screens[cubit.currentPage],
