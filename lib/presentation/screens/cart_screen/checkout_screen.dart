@@ -1,5 +1,6 @@
 import 'package:evira_store/core/app_router/route_names.dart';
 import 'package:evira_store/core/constants/promo_codes.dart';
+import 'package:evira_store/data/models/Order.dart';
 import 'package:evira_store/presentation/cubits/bottom_navbar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:evira_store/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
@@ -180,14 +181,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Expanded(child: CustomButton(onTap: ()async{
                     // Navigator.of(context).pushNamed(RouteNames.paymentScreen);
-                    await BlocProvider.of<OrdersCubit>(context).addOrder(
-                        orderProducts: cartList,
-                        user: user,
-                        subTotal: BlocProvider.of<CartCubit>(context).totalPrice,
-                        discount: discount,
-                        shipping: shippingFees,
-                        total: BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount
-                    );
+                    final subTotal = BlocProvider.of<CartCubit>(context).totalPrice;
+                    final total = BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount;
+                    OrderModel order = OrderModel(orderProducts: cartList, userName: user.name, userEmail:
+                    user.email, userPhoneNumber: user.phoneNumber, subTotal: subTotal, shipping: shippingFees, discount: discount, total: total);
+                    await BlocProvider.of<OrdersCubit>(context).addOrder(order);
                     showDialog(context: context, builder: (context)=>
                         customAlertDialog(context: context, title: "Order Successful!",
                           description: "You have successfully made order", imagePath: "assets/images/cart_icon.png",hasLoading: false,

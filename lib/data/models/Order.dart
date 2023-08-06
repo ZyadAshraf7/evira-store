@@ -5,16 +5,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 class OrderModel {
   String? orderId;
   List<Product>? orderProducts;
-  UserModel? user;
+  String? userName;
+  String? userEmail;
+  String? userPhoneNumber;
   double ?subTotal;
   double ?shipping;
   double ?discount;
   double ?total;
 
   OrderModel({
-    required this.orderId,
+    this.orderId,
     required this.orderProducts,
-    required this.user,
+    required this.userName,
+    required this.userEmail,
+    required this.userPhoneNumber,
     required this.subTotal,
     required this.shipping,
     required this.discount,
@@ -22,7 +26,9 @@ class OrderModel {
   });
 
   OrderModel.fromJson(Map<String,dynamic>json){
-    user = json["user"];
+    userName = json["userName"];
+    userEmail = json["userEmail"];
+    userPhoneNumber = json["userPhoneNumber"];
     orderId = json["orderId"];
     orderProducts = json["orderProducts"];
     subTotal = json["subTotal"];
@@ -32,7 +38,9 @@ class OrderModel {
   }
   Map<String,dynamic> toJson(){
     Map<String,dynamic> data = <String, dynamic>{};
-    data["user"] = user?.toJson();
+    data["userName"] = userName;
+    data["userEmail"] = userEmail;
+    data["userPhoneNumber"] = userPhoneNumber;
     data["orderId"] = orderId;
     data["orderProducts"] = orderProducts?.map((e) => e.toJson());
     data["subTotal"] = subTotal;

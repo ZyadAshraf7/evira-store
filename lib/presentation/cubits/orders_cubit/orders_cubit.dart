@@ -13,13 +13,7 @@ class OrdersCubit extends Cubit<OrdersState> {
   OrdersCubit() : super(OrdersInitial());
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> addOrder(
-      {required List<Product> orderProducts,
-      required UserModel user,
-      required double subTotal,
-      required double shipping,
-      required double discount,
-      required double total}) async {
+  Future<void> addOrder(OrderModel orderModel) async {
     try {
       final DocumentReference orderDoc = _firestore
           .collection("orders")
@@ -28,12 +22,14 @@ class OrdersCubit extends Cubit<OrdersState> {
           .doc();
       OrderModel order = OrderModel(
           orderId: orderDoc.id,
-          orderProducts: orderProducts,
-          user: user,
-          subTotal: subTotal,
-          shipping: shipping,
-          discount: discount,
-          total: total);
+          orderProducts: orderModel.orderProducts,
+          userEmail: orderModel.userEmail,
+          userName: orderModel.userName,
+          userPhoneNumber: orderModel.userPhoneNumber,
+          subTotal: orderModel.subTotal,
+          shipping: orderModel.shipping,
+          discount: orderModel.discount,
+          total: orderModel.total);
       await orderDoc.set(order.toJson());
     }catch(e){
       print(e.toString());
