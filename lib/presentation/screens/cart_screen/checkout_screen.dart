@@ -195,7 +195,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                      Navigator.of(context).pop();
                                        Navigator.of(context).pop();
                                        context.read<BottomNavBarCubit>().navigateScreens(2);
-                                  }, title: "View Order"),
+                                  }, title: "View Orders"),
                                   )
                                 ],
                               )

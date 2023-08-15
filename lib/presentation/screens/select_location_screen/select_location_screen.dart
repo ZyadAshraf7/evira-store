@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:evira_store/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_google_places_hoc081098/flutter_google_places_hoc081098.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:maps_places_autocomplete/maps_places_autocomplete.dart';
+import 'package:maps_places_autocomplete/model/place.dart';
+import 'package:maps_places_autocomplete/model/suggestion.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../core/app_router/route_names.dart';
@@ -44,11 +46,35 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
     }
     getSuggestion(_controller.text);
   }
+  String? _streetNumber;
+  String? _street;
+  String? _city;
+  String? _state;
+  String? _zipCode;
+  String? _vicinity;
+  String? _country;
+  double? _lat;
+  double? _lng;
+
+  // write a function to receive the place details callback
+  void onSuggestionClick(Place placeDetails) {
+    setState(() {
+      _streetNumber = placeDetails.streetNumber;
+      _street = placeDetails.street;
+      _city = placeDetails.city;
+      _state = placeDetails.state;
+      _zipCode = placeDetails.zipCode;
+      _country = placeDetails.country;
+      _vicinity = placeDetails.vicinity;
+      _lat = placeDetails.lat;
+      _lng = placeDetails.lng;
+    });
+  }
+  String kPLACES_API_KEY = "AIzaSyCYy4lI7c88j-y2yP2Ql7RJHjjlvOalits";
 
   void getSuggestion(String input) async {
 
 
-    String kPLACES_API_KEY = "AIzaSyCYy4lI7c88j-y2yP2Ql7RJHjjlvOalits";
 
     try{
       String baseURL =
@@ -98,13 +124,37 @@ class _SelectLocationScreenState extends State<SelectLocationScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 16.0,left: 16,top: 16),
-                child: TextFormField(
+                child: MapsPlacesAutocomplete(
+                    mapsApiKey: kPLACES_API_KEY,
+                    onSuggestionClick: onSuggestionClick,
+                    buildItem: (Suggestion suggestion, int index) {
+                      return Container(
+                          margin: const EdgeInsets.fromLTRB(2, 2, 2, 0),
+                          padding: const EdgeInsets.all(8),
+                          alignment: Alignment.centerLeft,
+                          color: Colors.white,
+                          child: Text(suggestion.description)
+                      );
+                    },
+                    inputDecoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(8),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        hintText:
+                        "select your location",
+                        errorText: null),
+                    clearButton: const Icon(Icons.close),
+                    componentCountry: 'eg',
+                    language: 'pt-Br'
+                ),
+
+                /*TextFormField(
                   decoration: InputDecoration(
                     fillColor: Colors.white,
 
                   ),
                   controller: _controller,
-                ),
+                ),*/
               ),
               const Spacer(),
               Padding(
