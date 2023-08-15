@@ -12,3 +12,4 @@ class IncrementQuantity extends CartState {}
 class DecrementQuantity extends CartState {}
 class RemoveProductFromCart extends CartState {}
 class TotalPriceChange extends CartState {}
+class ClearCart extends CartState {}

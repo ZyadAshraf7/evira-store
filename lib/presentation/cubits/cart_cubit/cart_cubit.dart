@@ -66,4 +66,13 @@ class CartCubit extends Cubit<CartState> {
     // emit(TotalPriceChange());
     return totalPrice;
   }
+
+  Future<void> clearCart()async{
+    cartList.clear();
+    await _firestore.collection("users").doc(UserPreferences.getUserEmail()).update(
+        {
+          "cartProducts":[]
+        });
+    emit(ClearCart());
+  }
 }

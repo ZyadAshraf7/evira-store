@@ -194,7 +194,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               body: Row(
                                 children: [
                                   Expanded(child: CustomButton(onTap: ()async{
-
+                                    context.read<CartCubit>().clearCart();
                                      Navigator.of(context).pop();
                                        Navigator.of(context).pop();
                                        context.read<BottomNavBarCubit>().navigateScreens(2);
