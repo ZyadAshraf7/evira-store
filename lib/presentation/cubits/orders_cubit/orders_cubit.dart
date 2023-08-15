@@ -49,6 +49,7 @@ class OrdersCubit extends Cubit<OrdersState> {
           UserPreferences.getUserEmail()).collection("userOrders").get();
       // log(snapshot.docs.first.data().toString());
       if(snapshot.docs.isNotEmpty) {
+        userOrders.clear();
         for (var doc in snapshot.docs) {
           userOrders.add(OrderModel.fromJson(doc.data() as Map<String, dynamic>));
         }
