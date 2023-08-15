@@ -75,7 +75,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               const SizedBox(height: 24),
               Text("Your Information",style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 24),
-              UserInfoForCheckout(user: user),
+              UserInfoForCheckout(name: user.name??"",phoneNumber: user.phoneNumber??""),
               const SizedBox(height: 24),
               Text("Your Order",style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 24),
@@ -184,7 +184,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     final subTotal = BlocProvider.of<CartCubit>(context).totalPrice;
                     final total = BlocProvider.of<CartCubit>(context).totalPrice + shippingFees - discount;
                     OrderModel order = OrderModel(orderProducts: cartList, userName: user.name, userEmail:
-                    user.email, userPhoneNumber: user.phoneNumber, subTotal: subTotal, shipping: shippingFees, discount: discount, total: total);
+                    user.email, userPhoneNumber: user.phoneNumber, subTotal: subTotal, shipping: shippingFees, discount: discount, total: total,
+                    address: BlocProvider.of<GetUserInfoCubit>(context).currentUser.address??"",
+                    );
                     await BlocProvider.of<OrdersCubit>(context).addOrder(order).then((value){
                       showDialog(context: context, builder: (context)=>
                           customAlertDialog(context: context, title: "Order Successful!",
@@ -192,6 +194,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               body: Row(
                                 children: [
                                   Expanded(child: CustomButton(onTap: ()async{
+
                                      Navigator.of(context).pop();
                                        Navigator.of(context).pop();
                                        context.read<BottomNavBarCubit>().navigateScreens(2);

@@ -1,4 +1,5 @@
 import 'package:evira_store/core/app_router/route_names.dart';
+import 'package:evira_store/data/models/Order.dart';
 import 'package:evira_store/data/models/product.dart';
 import 'package:evira_store/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:evira_store/presentation/cubits/favourite_products_cubit/favourite_products_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:evira_store/presentation/screens/details_screen/details_screen.d
 import 'package:evira_store/presentation/screens/favourite_products_screen/favourite_products_screen.dart';
 import 'package:evira_store/presentation/screens/home_screen/home_screen.dart';
 import 'package:evira_store/presentation/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:evira_store/presentation/screens/orders_screen/order_details_screen.dart';
 import 'package:evira_store/presentation/screens/profile_screen/privacy_and_policy.dart';
 import 'package:evira_store/presentation/screens/search_screen/search_screen.dart';
 import 'package:evira_store/presentation/screens/select_location_screen/select_location_screen.dart';
@@ -75,6 +77,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => PaymentScreen());
       case RouteNames.selectLocationScreen:
         return MaterialPageRoute(builder: (_) => const SelectLocationScreen());
+      case RouteNames.orderDetailsScreen:
+        return MaterialPageRoute(builder: (_) => OrderDetailsScreen(order: settings.arguments as OrderModel),settings: settings);
     }
     return null;
   }

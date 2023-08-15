@@ -67,7 +67,7 @@ class CartScreen extends StatelessWidget {
                                   style: AppTheme.bodySmallSemiBold
                                       .copyWith(color: AppTheme.grey600)),
                               const SizedBox(height: 6),
-                              Text("\$${cubit.calculateTotalPrices()}",
+                              Text("\$${cubit.calculateTotalPrices().toStringAsFixed(2)}",
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium

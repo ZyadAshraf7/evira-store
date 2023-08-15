@@ -14,6 +14,7 @@ class OrderModel {
   double ?discount;
   double ?total;
   Timestamp? orderDate;
+  String? address;
 
   OrderModel({
     this.orderId,
@@ -25,7 +26,8 @@ class OrderModel {
     required this.shipping,
     required this.discount,
     required this.total,
-    this.orderDate
+    this.orderDate,
+    required this.address
   });
 
   OrderModel.fromJson(Map<String,dynamic>json){
@@ -39,6 +41,7 @@ class OrderModel {
     discount = json["discount"];
     total = json["total"];
     orderDate = json["orderDate"];
+    address = json["address"];
   }
   Map<String,dynamic> toJson(){
     Map<String,dynamic> data = <String, dynamic>{};
@@ -52,6 +55,8 @@ class OrderModel {
     data["discount"] = discount;
     data["total"] = total;
     data["orderDate"] = orderDate;
+    data["address"] = address;
+
     return data;
   }
 }

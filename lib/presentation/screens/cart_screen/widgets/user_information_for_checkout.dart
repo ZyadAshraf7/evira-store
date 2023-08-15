@@ -6,11 +6,11 @@ import '../../../../data/models/user.dart';
 
 class UserInfoForCheckout extends StatelessWidget {
   const UserInfoForCheckout({
-    super.key,
-    required this.user,
+    super.key, required this.name, required this.phoneNumber,
   });
 
-  final UserModel user;
+  final String name;
+  final String phoneNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,9 @@ class UserInfoForCheckout extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(user.name??"",style: Theme.of(context).textTheme.titleLarge),
+                Text(name??"",style: Theme.of(context).textTheme.titleLarge),
                 const SizedBox(height: 8),
-                Text(user.phoneNumber??"",style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700))
+                Text(phoneNumber??"",style: AppTheme.bodyMediumMedium.copyWith(color: AppTheme.grey700))
               ],
             ),
           ],

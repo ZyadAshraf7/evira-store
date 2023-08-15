@@ -34,6 +34,7 @@ class OrdersCubit extends Cubit<OrdersState> {
           discount: orderModel.discount,
           total: orderModel.total,
         orderDate: Timestamp.now(),
+        address: orderModel.address,
       );
       await orderDoc.set(order.toJson());
       userOrders.insert(0, order);
