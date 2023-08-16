@@ -31,7 +31,20 @@ class OrderDetailsScreen extends StatelessWidget {
         ),
         actions: [
           TextButton(onPressed: (){
-            context.read<OrdersCubit>().deleteOrder(order.orderId??"");
+            showDialog(context: context, builder: (context)=>AlertDialog(
+              title: Text("Cancel Order"),
+              content: Text("Are you sure you want to cancel this order ?"),
+              actions: [
+                TextButton(onPressed: (){
+                  Navigator.of(context).pop();
+                }, child: const Text("No",style: TextStyle(color: AppTheme.grey700))),
+                TextButton(onPressed: (){
+                  context.read<OrdersCubit>().deleteOrder(order.orderId??"");
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                }, child: const Text("Yes",style: TextStyle(color: AppTheme.error))),
+              ],
+            ));
           }, child: Text("Cancel Order",style: AppTheme.bodySmallBold.copyWith(color: AppTheme.error)))
         ],
       ),
