@@ -76,12 +76,12 @@ class ProfileScreen extends StatelessWidget {
                 ListTile(
                   onTap: () {},
                   leading: SvgPicture.asset(
-                    "assets/icons/Location.svg",
+                    "assets/icons/Heart.svg",
                     colorFilter: const ColorFilter.mode(
                         AppTheme.grey900, BlendMode.srcIn),
                   ),
                   title:
-                      const Text("Address", style: AppTheme.bodyXLargeSemiBold),
+                      const Text("Wishlist", style: AppTheme.bodyXLargeSemiBold),
                   trailing: SvgPicture.asset("assets/icons/Arrow_Right.svg"),
                 ),
                 ListTile(

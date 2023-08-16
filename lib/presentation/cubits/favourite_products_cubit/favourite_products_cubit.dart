@@ -19,6 +19,8 @@ class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {
       favouriteProducts = favouriteProductResponse.map((e) => Product.fromJson(e)).toList();
       if(favouriteProducts.isNotEmpty){
         emit(FavouriteProductsDone());
+      }else{
+
       }
     }catch(e){
       emit(FavouriteProductsFailed());
