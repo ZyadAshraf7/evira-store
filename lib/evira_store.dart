@@ -33,7 +33,7 @@ class EviraStore extends StatelessWidget {
           child: const BottomNavBarScreen(),
         ),
         BlocProvider(create: (_) => HomeCubit()..fetchAllProductsWithLimit()),
-        BlocProvider(create: (context) => FavouriteProductsCubit()..fetchUserFavouriteProducts()),
+        BlocProvider(create: (context) => FavouriteProductsCubit()),
         BlocProvider(create: (_)=>CartCubit()),
         BlocProvider(create: (_) => GetUserInfoCubit()..getUserInfo()),
         BlocProvider(create: (_)=>OrdersCubit()),

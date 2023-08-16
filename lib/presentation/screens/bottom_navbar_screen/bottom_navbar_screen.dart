@@ -1,14 +1,31 @@
 import 'package:evira_store/core/theme/app_theme.dart';
 import 'package:evira_store/presentation/cubits/bottom_navbar_cubit/bottom_nav_bar_cubit.dart';
 import 'package:evira_store/presentation/cubits/cart_cubit/cart_cubit.dart';
+import 'package:evira_store/presentation/cubits/favourite_products_cubit/favourite_products_cubit.dart';
 import 'package:evira_store/presentation/cubits/orders_cubit/orders_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BottomNavBarScreen extends StatelessWidget {
+class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({Key? key}) : super(key: key);
 
+  @override
+  State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
+}
+
+class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
+/*  @override
+  void initState() {
+      super.initState();
+      BlocProvider.of<FavouriteProductsCubit>(context).fetchUserFavouriteProducts();
+
+  }*/
+  @override
+  void didChangeDependencies() async{
+    super.didChangeDependencies();
+    await BlocProvider.of<FavouriteProductsCubit>(context).fetchUserFavouriteProducts();
+  }
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<BottomNavBarCubit>(context);

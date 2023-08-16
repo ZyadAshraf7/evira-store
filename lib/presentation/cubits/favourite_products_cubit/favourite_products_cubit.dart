@@ -12,19 +12,22 @@ class FavouriteProductsCubit extends Cubit<FavouriteProductsState> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   List<Product>favouriteProducts = [];
   fetchUserFavouriteProducts()async{
+    print("facorit");
     emit(FavouriteProductsLoading());
     try{
       final document = await _firestore.collection("users").doc(UserPreferences.getUserEmail()).get();
       List<dynamic> favouriteProductResponse = document.get("favouriteProducts");
-      favouriteProducts = favouriteProductResponse.map((e) => Product.fromJson(e)).toList();
-      if(favouriteProducts.isNotEmpty){
+      if(favouriteProductResponse.isNotEmpty) {
+        print("not empty");
+        favouriteProducts = favouriteProductResponse.map((e) => Product.fromJson(e)).toList();
         emit(FavouriteProductsDone());
       }else{
-
+        print("empty");
+        emit(FavouriteProductsEmpty());
       }
     }catch(e){
       emit(FavouriteProductsFailed());
-      print(e);
+      print(e.toString());
     }
   }
 

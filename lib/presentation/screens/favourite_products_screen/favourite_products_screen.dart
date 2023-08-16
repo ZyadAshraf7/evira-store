@@ -29,6 +29,9 @@ class FavouriteProductsScreen extends StatelessWidget {
           if(state is FavouriteProductsLoading){
             return Center(child: loadingSpinner());
           }
+          if(state is FavouriteProductsEmpty){
+            return const Center(child: Text("Your Wishlist is empty"));
+          }
           return GetAllProductsBox(productsList: cubit.favouriteProducts);
         },
       ),
