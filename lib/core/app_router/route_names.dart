@@ -17,6 +17,7 @@ class RouteNames {
   static const paymentScreen = "/paymentScreen";
   static const selectLocationScreen = "/selectLocationScreen";
   static const orderDetailsScreen = "/orderDetailsScreen";
+  static const helpCenterScreen = "/helpCenterScreen";
 
 
 }

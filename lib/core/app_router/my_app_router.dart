@@ -14,6 +14,7 @@ import 'package:evira_store/presentation/screens/cart_screen/cart_screen.dart';
 import 'package:evira_store/presentation/screens/cart_screen/checkout_screen.dart';
 import 'package:evira_store/presentation/screens/details_screen/details_screen.dart';
 import 'package:evira_store/presentation/screens/favourite_products_screen/favourite_products_screen.dart';
+import 'package:evira_store/presentation/screens/help_center/help_center_screen.dart';
 import 'package:evira_store/presentation/screens/home_screen/home_screen.dart';
 import 'package:evira_store/presentation/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:evira_store/presentation/screens/orders_screen/order_details_screen.dart';
@@ -79,6 +80,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SelectLocationScreen());
       case RouteNames.orderDetailsScreen:
         return MaterialPageRoute(builder: (_) => OrderDetailsScreen(order: settings.arguments as OrderModel),settings: settings);
+      case RouteNames.helpCenterScreen:
+        return MaterialPageRoute(builder: (_) => const HelpCenterScreen());
     }
     return null;
   }

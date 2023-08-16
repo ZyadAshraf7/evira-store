@@ -98,7 +98,9 @@ class ProfileScreen extends StatelessWidget {
                   trailing: SvgPicture.asset("assets/icons/Arrow_Right.svg"),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(RouteNames.helpCenterScreen);
+                  },
                   leading: SvgPicture.asset(
                     "assets/icons/Info_Square.svg",
                     colorFilter: const ColorFilter.mode(

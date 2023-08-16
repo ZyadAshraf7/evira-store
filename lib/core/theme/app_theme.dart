@@ -83,47 +83,47 @@ class AppTheme {
   static const TextStyle bodyXLargeBold = TextStyle(
     fontSize: 18.0, fontWeight: FontWeight.bold,);
   static const TextStyle bodyXLargeSemiBold = TextStyle(
-    fontSize: 18.0, fontWeight: FontWeight.w600,);
+    fontSize: 18.0, fontWeight: FontWeight.w600,fontFamily: 'Urbanist');
   static const TextStyle bodyXLargeMedium = TextStyle(
-    fontSize: 18.0, fontWeight: FontWeight.w500,);
+    fontSize: 18.0, fontWeight: FontWeight.w500,fontFamily: 'Urbanist');
   static const TextStyle bodyXLargeRegular = TextStyle(
-    fontSize: 18.0, fontWeight: FontWeight.w400,);
+    fontSize: 18.0, fontWeight: FontWeight.w400,fontFamily: 'Urbanist');
 
   static const TextStyle bodyLargeBold = TextStyle(
-    fontSize: 16.0, fontWeight: FontWeight.bold,);
+    fontSize: 16.0, fontWeight: FontWeight.bold,fontFamily: 'Urbanist');
   static const TextStyle bodyLargeSemiBold = TextStyle(
-    fontSize: 16.0, fontWeight: FontWeight.w600,);
+    fontSize: 16.0, fontWeight: FontWeight.w600,fontFamily: 'Urbanist');
   static const TextStyle bodyLargeMedium = TextStyle(
-    fontSize: 16.0, fontWeight: FontWeight.w500,);
+    fontSize: 16.0, fontWeight: FontWeight.w500,fontFamily: 'Urbanist');
   static const TextStyle bodyLargeRegular = TextStyle(
-    fontSize: 16.0, fontWeight: FontWeight.w400,);
+    fontSize: 16.0, fontWeight: FontWeight.w400,fontFamily: 'Urbanist');
 
   static const TextStyle bodyMediumBold = TextStyle(
-    fontSize: 14.0, fontWeight: FontWeight.bold,);
+    fontSize: 14.0, fontWeight: FontWeight.bold,fontFamily: 'Urbanist');
   static const TextStyle bodyMediumSemiBold = TextStyle(
-    fontSize: 14.0, fontWeight: FontWeight.w600,);
+    fontSize: 14.0, fontWeight: FontWeight.w600,fontFamily: 'Urbanist');
   static const TextStyle bodyMediumMedium = TextStyle(
-    fontSize: 14.0, fontWeight: FontWeight.w500,);
+    fontSize: 14.0, fontWeight: FontWeight.w500,fontFamily: 'Urbanist');
   static const TextStyle bodyMediumRegular = TextStyle(
-    fontSize: 14.0, fontWeight: FontWeight.w400,);
+    fontSize: 14.0, fontWeight: FontWeight.w400,fontFamily: 'Urbanist');
 
   static const TextStyle bodySmallBold = TextStyle(
-    fontSize: 12.0, fontWeight: FontWeight.bold,);
+    fontSize: 12.0, fontWeight: FontWeight.bold,fontFamily: 'Urbanist');
   static const TextStyle bodySmallSemiBold = TextStyle(
-    fontSize: 12.0, fontWeight: FontWeight.w600,);
+    fontSize: 12.0, fontWeight: FontWeight.w600,fontFamily: 'Urbanist');
   static const TextStyle bodySmallMedium = TextStyle(
-    fontSize: 12.0, fontWeight: FontWeight.w500,);
+    fontSize: 12.0, fontWeight: FontWeight.w500,fontFamily: 'Urbanist');
   static const TextStyle bodySmallRegular = TextStyle(
-    fontSize: 12.0, fontWeight: FontWeight.w400,);
+    fontSize: 12.0, fontWeight: FontWeight.w400,fontFamily: 'Urbanist');
 
   static const TextStyle bodyXSmallBold = TextStyle(
-    fontSize: 10.0, fontWeight: FontWeight.bold,);
+    fontSize: 10.0, fontWeight: FontWeight.bold,fontFamily: 'Urbanist');
   static const TextStyle bodyXSmallSemiBold = TextStyle(
-    fontSize: 10.0, fontWeight: FontWeight.w600,);
+    fontSize: 10.0, fontWeight: FontWeight.w600,fontFamily: 'Urbanist');
   static const TextStyle bodyXSmallMedium = TextStyle(
-    fontSize: 10.0, fontWeight: FontWeight.w500,);
+    fontSize: 10.0, fontWeight: FontWeight.w500,fontFamily: 'Urbanist');
   static const TextStyle bodyXSmallRegular = TextStyle(
-    fontSize: 10.0, fontWeight: FontWeight.w400,);
+    fontSize: 10.0, fontWeight: FontWeight.w400,fontFamily: 'Urbanist');
 
   static Gradient blackGradient = const LinearGradient(
     colors: [
