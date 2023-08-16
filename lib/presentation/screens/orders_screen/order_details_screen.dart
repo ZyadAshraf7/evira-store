@@ -1,3 +1,4 @@
+import 'package:evira_store/presentation/cubits/orders_cubit/orders_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,7 +30,9 @@ class OrderDetailsScreen extends StatelessWidget {
           ],
         ),
         actions: [
-          TextButton(onPressed: (){}, child: Text("Cancel Order",style: AppTheme.bodySmallBold.copyWith(color: AppTheme.error)))
+          TextButton(onPressed: (){
+            context.read<OrdersCubit>().deleteOrder(order.orderId??"");
+          }, child: Text("Cancel Order",style: AppTheme.bodySmallBold.copyWith(color: AppTheme.error)))
         ],
       ),
       body: SingleChildScrollView(

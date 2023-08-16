@@ -67,4 +67,19 @@ class OrdersCubit extends Cubit<OrdersState> {
       return [];
     }
   }
+  Future<void>deleteOrder(String orderId)async{
+    emit(DeleteOrderLoading());
+    try {
+      print(orderId);
+      String documentPath = "orders/${UserPreferences.getUserEmail()}/userOrders/$orderId";
+      await _firestore.doc(documentPath).delete();
+      /*await _firestore.collection("users").doc(UserPreferences.getUserEmail())
+          .collection("userOrders").doc(orderId)
+          .delete();*/
+      userOrders.removeWhere((element) => element.orderId == orderId);
+      emit(DeleteOrderDone());
+    }catch(e){
+      emit(DeleteOrderFailed());
+    }
+  }
 }
