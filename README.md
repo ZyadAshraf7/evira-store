@@ -1,16 +1,13 @@
-# evira_store
+# Evira Store
 
-A new Flutter project.
+## E-Commerce App with Full Features & Details
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+* Wishlist, Shopping Cart,Order/Checkout&Shipping.
+* Onboarding, sign up, sign in, Reset Password, Account Setup,Notification, Address, Customer Support& More.
+* Application is developed using bloc statemanagement and Firebase as a backend.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![evira 1](https://github.com/ZyadAshraf7/evira-store/assets/73830725/6c5e7a37-0286-41ba-97e6-b2eb06c7841b)
+![evira 2](https://github.com/ZyadAshraf7/evira-store/assets/73830725/49493af4-4650-4a4f-aed6-a05a36e3756d)
+![evira 3](https://github.com/ZyadAshraf7/evira-store/assets/73830725/f8407010-e915-42a0-baa3-3dbb6d586375)
