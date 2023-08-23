@@ -16,3 +16,9 @@ class CreateUserLoading extends RegisterUserState {}
 class CreateUserDone extends RegisterUserState {}
 
 class CreateUserFailed extends RegisterUserState {}
+
+class ChangeUserProfileLoading extends RegisterUserState {}
+
+class ChangeUserProfileDone extends RegisterUserState {}
+
+class ChangeUserProfileFailed extends RegisterUserState {}

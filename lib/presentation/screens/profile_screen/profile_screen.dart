@@ -3,6 +3,7 @@ import 'package:evira_store/core/constants/app_strings.dart';
 import 'package:evira_store/core/theme/app_theme.dart';
 import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:evira_store/presentation/cubits/register_user_cubit/register_user_cubit.dart';
+import 'package:evira_store/presentation/widgets/loading_spinner.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +17,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<GetUserInfoCubit>(context);
-    final user = cubit.currentUser;
+/*    final cubit = BlocProvider.of<GetUserInfoCubit>(context);
+    final user = cubit.currentUser;*/
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -33,17 +34,24 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
+                BlocBuilder<RegisterUserCubit, RegisterUserState>(
+                builder: (context, state) {
+                  if(state is UploadPhotoLoading || state is ChangeUserProfileLoading){
+                    return loadingSpinner();
+                  }
+                  return Stack(
                   alignment: Alignment.bottomRight,
                   children: [
                     CircleAvatar(
-                      foregroundImage: NetworkImage(user.imageUrl??DEFAULT_USER_IMAGE),
+                      foregroundImage: NetworkImage(BlocProvider.of<GetUserInfoCubit>(context).currentUser.imageUrl??DEFAULT_USER_IMAGE),
                       radius: 55,
                     ),
                     GestureDetector(
                       onTap: () {
                         BlocProvider.of<RegisterUserCubit>(context)
-                            .uploadProfilePicture();
+                            .changeProfilePicture().then((value){
+                          BlocProvider.of<GetUserInfoCubit>(context).getUserInfo();
+                        });
                         //TODO: Update User Profile
                       },
                       child: SvgPicture.asset(
@@ -54,9 +62,11 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     )
                   ],
-                ),
+                );
+  },
+),
                 const SizedBox(height: 12),
-                Text(user.name ?? "",
+                Text(BlocProvider.of<GetUserInfoCubit>(context).currentUser.name ?? "",
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppTheme.grey900)
                 ),
                 const SizedBox(height: 40),

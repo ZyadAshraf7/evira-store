@@ -89,7 +89,7 @@ class RegisterUserCubit extends Cubit<RegisterUserState> {
     passwordObsecure=!passwordObsecure;
     print(passwordObsecure);
   }
-  uploadProfilePicture() async {
+  Future<String>uploadProfilePicture() async {
     final _picker = ImagePicker();
     PickedFile? _imageFile;
     String? _uploadedFileURL;
@@ -105,9 +105,26 @@ class RegisterUserCubit extends Cubit<RegisterUserState> {
       TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
       userImageUrl = await taskSnapshot.ref.getDownloadURL();
       emit(UploadPhotoDone());
+      return userImageUrl;
     } catch (e) {
       print(e.toString());
       emit(UploadPhotoFailed());
+      return "";
+    }
+  }
+  Future<void>changeProfilePicture()async{
+    String imageUrl = await uploadProfilePicture();
+    try {
+      emit(ChangeUserProfileLoading());
+      await FirebaseFirestore.instance.collection("users").doc(
+          UserPreferences.getUserEmail()).update(
+          {
+            "imageUrl": imageUrl
+          });
+      emit(ChangeUserProfileDone());
+    }catch(e){
+      print(e.toString());
+      emit(ChangeUserProfileFailed());
     }
   }
 }
