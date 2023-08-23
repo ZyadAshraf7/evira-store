@@ -85,10 +85,10 @@ class RegisterUserCubit extends Cubit<RegisterUserState> {
     }
   }
   Future<void>logoutFromGoogle()async{
-    await GoogleSignIn().signOut();
-    await _auth.signOut();
     await UserPreferences.setUserToken("");
     await UserPreferences.setUserEmail("");
+    await GoogleSignIn().signOut();
+    await _auth.signOut();
   }
   String? validateEmail(String ?value){
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'); // Validate email is valid using RegEx

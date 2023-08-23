@@ -1,4 +1,5 @@
 import 'package:evira_store/core/app_router/route_names.dart';
+import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:evira_store/presentation/cubits/login_user_cubit/login_user_cubit.dart';
 import 'package:evira_store/presentation/screens/auth_form/auth_form.dart';
 import 'package:evira_store/presentation/widgets/loading_spinner.dart';
@@ -51,8 +52,9 @@ class LoginScreen extends StatelessWidget {
                 print(cubit.passwordController.text);
                 cubit.loginUser(
                     cubit.emailController.text, cubit.passwordController.text).then((value){
-                  Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
-
+                  context.read<GetUserInfoCubit>().getUserInfo().then((value){
+                    Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
+                      });
                 });
               }
             },

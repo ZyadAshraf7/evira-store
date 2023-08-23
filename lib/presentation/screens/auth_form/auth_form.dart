@@ -1,4 +1,5 @@
 import 'package:evira_store/core/theme/app_theme.dart';
+import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:evira_store/presentation/cubits/register_user_cubit/register_user_cubit.dart';
 import 'package:evira_store/presentation/widgets/custom_button.dart';
 import 'package:evira_store/presentation/widgets/custom_text_field.dart';
@@ -102,8 +103,9 @@ class AuthForm extends StatelessWidget {
                   context.read<RegisterUserCubit>().logoutFromGoogle();
                 }, child: Text("logout")),
                 BlocListener<RegisterUserCubit, RegisterUserState>(
-                  listener: (context, state) {
+                  listener: (context, state)async {
                     if(state is UserGoogleDone){
+                      await context.read<GetUserInfoCubit>().getUserInfo();
                       Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
                     }
                   },
