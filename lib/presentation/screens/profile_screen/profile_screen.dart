@@ -84,7 +84,9 @@ class ProfileScreen extends StatelessWidget {
                   trailing: SvgPicture.asset("assets/icons/Arrow_Right.svg"),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(RouteNames.favouriteProductsScreen);
+                  },
                   leading: SvgPicture.asset(
                     "assets/icons/Heart.svg",
                     colorFilter: const ColorFilter.mode(
