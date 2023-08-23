@@ -1,10 +1,18 @@
 import 'package:evira_store/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUsBody extends StatelessWidget {
   const ContactUsBody({Key? key}) : super(key: key);
 
+  _launchSocialMedia(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Something went wrong",style: TextStyle(color: Colors.white),),backgroundColor: AppTheme.error));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,11 +20,19 @@ class ContactUsBody extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            ContactusCard(title: "Website",iconPath: "assets/icons/website.svg",onTap: (){}),
+            ContactusCard(title: "Website",iconPath: "assets/icons/website.svg",onTap: (){
+              _launchSocialMedia("https://github.com/ZyadAshraf7/evira-store");
+            }),
             ContactusCard(title: "WhatsApp",iconPath: "assets/icons/whatsapp.svg",onTap: (){}),
-            ContactusCard(title: "Facebook",iconPath: "assets/icons/facebook.svg",onTap: (){}),
-            ContactusCard(title: "Instagram",iconPath: "assets/icons/instagram.svg",onTap: (){}),
-            ContactusCard(title: "Twitter",iconPath: "assets/icons/twitter.svg",onTap: (){}),
+            ContactusCard(title: "Facebook",iconPath: "assets/icons/facebook.svg",onTap: (){
+              _launchSocialMedia("https://www.facebook.com/ashraf.harfosh.5");
+            }),
+            ContactusCard(title: "Instagram",iconPath: "assets/icons/instagram.svg",onTap: (){
+              _launchSocialMedia("https://www.instagram.com/___ziadashraf___/");
+            }),
+            ContactusCard(title: "Twitter",iconPath: "assets/icons/twitter.svg",onTap: (){
+              _launchSocialMedia("https://twitter.com/PRO_Xiad");
+            }),
           ],
         ),
       ),
