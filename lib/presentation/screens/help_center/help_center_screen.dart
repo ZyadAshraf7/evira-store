@@ -1,4 +1,5 @@
 import 'package:evira_store/presentation/screens/help_center/widgets/FAQ_body.dart';
+import 'package:evira_store/presentation/screens/help_center/widgets/contact_us_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -54,7 +55,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> with SingleTickerPr
         controller: _tabController,
         children: [
           FAQBody(),
-          Center(child: Text('Tab 2 content')),
+          ContactUsBody()
         ],
       )
     );
