@@ -22,7 +22,7 @@ class GetUserInfoCubit extends Cubit<GetUserInfoState> {
           await _firestore.collection("users").doc(UserPreferences.getUserEmail()).get();
       if (data.data() != null) {
         currentUser = UserModel.fromJson(data.data()!);
-        print(currentUser.name);
+        print(currentUser.imageUrl);
         emit(GetUserInfoDone());
       }
     } catch (e) {

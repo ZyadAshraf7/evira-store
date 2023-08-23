@@ -58,6 +58,7 @@ dependencies:
   timezone: ^0.9.2
   maps_places_autocomplete: ^0.0.2
   url_launcher: ^6.1.12
+  easy_stepper: ^0.7.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
