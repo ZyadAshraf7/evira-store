@@ -75,9 +75,20 @@ class RegisterUserCubit extends Cubit<RegisterUserState> {
           cartProducts: [],
           favouriteProducts: [],
         );
-        createNewUser(myUser);
+        String googleToken = await user.getIdToken();
+        UserPreferences.setUserEmail(user.email??"");
+        UserPreferences.setUserToken(googleToken);
+        await FirebaseFirestore.instance.collection("users").doc(user.email).set(myUser.toJson()).then((value){
+          emit(UserGoogleDone());
+        });
       }
     }
+  }
+  Future<void>logoutFromGoogle()async{
+    await GoogleSignIn().signOut();
+    await _auth.signOut();
+    await UserPreferences.setUserToken("");
+    await UserPreferences.setUserEmail("");
   }
   String? validateEmail(String ?value){
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'); // Validate email is valid using RegEx

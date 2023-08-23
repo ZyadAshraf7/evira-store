@@ -22,3 +22,5 @@ class ChangeUserProfileLoading extends RegisterUserState {}
 class ChangeUserProfileDone extends RegisterUserState {}
 
 class ChangeUserProfileFailed extends RegisterUserState {}
+
+class UserGoogleDone extends RegisterUserState {}

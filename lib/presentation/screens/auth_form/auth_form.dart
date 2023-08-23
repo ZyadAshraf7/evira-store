@@ -6,17 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../core/app_router/route_names.dart';
+
 class AuthForm extends StatelessWidget {
-  const AuthForm(
-      {Key? key,
-      required this.screenTitle,
-      required this.buttonTitle,
-      required this.onTap,
-      required this.textButtonTitle,
-      required this.emailController,
-      required this.passwordController,
-      required this.navigateOnTap,
-      required this.userHasAccount, this.emailValidator, this.passwordValidator,required this.obsecure, })
+  const AuthForm({Key? key,
+    required this.screenTitle,
+    required this.buttonTitle,
+    required this.onTap,
+    required this.textButtonTitle,
+    required this.emailController,
+    required this.passwordController,
+    required this.navigateOnTap,
+    required this.userHasAccount, this.emailValidator, this.passwordValidator, required this.obsecure,})
       : super(key: key);
 
   final String screenTitle;
@@ -42,7 +43,8 @@ class AuthForm extends StatelessWidget {
           children: [
             Text(
               screenTitle,
-              style: Theme.of(context)
+              style: Theme
+                  .of(context)
                   .textTheme
                   .displayLarge
                   ?.copyWith(color: AppTheme.grey900),
@@ -94,20 +96,34 @@ class AuthForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            InkWell(
-              borderRadius: BorderRadius.circular(16),
-              onTap: () {
-                context.read<RegisterUserCubit>().createUserWithGoogle();
-              },
-              child: Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppTheme.grey200,
+            Row(
+              children: [
+                TextButton(onPressed: () {
+                  context.read<RegisterUserCubit>().logoutFromGoogle();
+                }, child: Text("logout")),
+                BlocListener<RegisterUserCubit, RegisterUserState>(
+                  listener: (context, state) {
+                    if(state is UserGoogleDone){
+                      Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
+                    }
+                  },
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () {
+                      context.read<RegisterUserCubit>().createUserWithGoogle();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppTheme.grey200,
+                          ),
+                          borderRadius: BorderRadius.circular(16)),
+                      child: SvgPicture.asset("assets/icons/google.svg"),
                     ),
-                    borderRadius: BorderRadius.circular(16)),
-                child: SvgPicture.asset("assets/icons/google.svg"),
-              ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 50),
             Row(
@@ -122,7 +138,8 @@ class AuthForm extends StatelessWidget {
                   onPressed: navigateOnTap,
                   child: Text(
                     textButtonTitle,
-                    style: AppTheme.bodyMediumSemiBold.copyWith(color: AppTheme.primary500),
+                    style: AppTheme.bodyMediumSemiBold.copyWith(
+                        color: AppTheme.primary500),
                   ),
                 )
               ],

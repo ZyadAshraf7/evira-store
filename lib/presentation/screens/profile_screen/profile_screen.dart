@@ -136,8 +136,9 @@ class ProfileScreen extends StatelessWidget {
                 ListTile(
                   onTap: ()async {
                     print("press");
-                    await FirebaseAuth.instance.signOut();
-                    await UserPreferences.setUserToken("");
+                    context.read<RegisterUserCubit>().logoutFromGoogle();
+                    print("user Token:${UserPreferences.getUserToken()}");
+                    print("user email:${UserPreferences.getUserEmail()}");
                     Navigator.of(context)
                         .pushReplacementNamed(RouteNames.loginScreen);
                   },
