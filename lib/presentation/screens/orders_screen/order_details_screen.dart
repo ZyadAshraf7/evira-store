@@ -1,3 +1,4 @@
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:evira_store/presentation/cubits/orders_cubit/orders_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,8 +81,30 @@ class OrderDetailsScreen extends StatelessWidget {
                 const Divider(thickness: 2),
                 const SizedBox(height: 10),
                 Text("Track Your Order",style: AppTheme.bodyLargeBold.copyWith(color: AppTheme.grey700)),
+                EasyStepper(direction: Axis.horizontal,
+                    enableStepTapping: false,
+                    disableScroll: true,
+                    showTitle: true,
+                    activeLineColor: AppTheme.primary400,
+                    // borderThickness: 1,
+                    defaultLineColor: AppTheme.grey500,
 
-                const SizedBox(height: 10),
+                    finishedStepBackgroundColor: Colors.transparent,
+                    activeStep: 5, steps: [
+                        EasyStep(
+                          customStep: SvgPicture.asset("assets/icons/packed.svg"),
+                          customTitle: const Center(child: Text("Processing",style: AppTheme.bodyMediumBold,)),
+                        ),
+                        EasyStep(
+                            customStep: SvgPicture.asset("assets/icons/shipping.svg",color: (order.status=="shipped"||order.status=="delivered")?AppTheme.primary500:AppTheme.primary200,),
+                          customTitle: Center(child: Text("Shipped",textAlign: TextAlign.center,style: AppTheme.bodyMediumBold.copyWith(color: (order.status=="shipped"||order.status=="delivered")?AppTheme.primary500:AppTheme.primary200),)),
+                        ),
+                        EasyStep(
+                            customStep: SvgPicture.asset("assets/icons/delivered.svg",color:order.status=="delivered"?AppTheme.primary500:AppTheme.primary200),
+                          customTitle: Center(child: Text("Delivered",textAlign: TextAlign.center,style: AppTheme.bodyMediumBold.copyWith(color: order.status=="delivered"?AppTheme.primary500:AppTheme.primary200),)),
+                        ),
+                  ]),
+                // const SizedBox(height: 10),
                 const Divider(thickness: 2),
                 const SizedBox(height: 10),
                 Text("Order Products",style: AppTheme.bodyLargeBold.copyWith(color: AppTheme.grey700)),
