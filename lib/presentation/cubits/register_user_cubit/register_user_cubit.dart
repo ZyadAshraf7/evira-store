@@ -5,8 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evira_store/data/models/response_error.dart';
 import 'package:evira_store/data/repositories/register_user/register_user_repository.dart';
 import 'package:evira_store/data/shared_preference/user_preference.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
@@ -52,7 +54,31 @@ class RegisterUserCubit extends Cubit<RegisterUserState> {
       print(e.toString());
     }
   }
-
+  final _auth = FirebaseAuth.instance;
+  Future<void>createUserWithGoogle()async{
+    final GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      final UserCredential authResult = await _auth.signInWithCredential(credential);
+      final User? user = authResult.user;
+      if(user!=null) {
+        UserModel myUser = UserModel(
+          name: user.displayName,
+          phoneNumber:user.phoneNumber,
+          email: user.email,
+          imageUrl: user.photoURL,
+          cartProducts: [],
+          favouriteProducts: [],
+        );
+        createNewUser(myUser);
+      }
+    }
+  }
   String? validateEmail(String ?value){
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$'); // Validate email is valid using RegEx
     if (value == null || value.isEmpty) {

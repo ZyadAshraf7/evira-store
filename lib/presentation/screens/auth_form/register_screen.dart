@@ -38,7 +38,7 @@ class RegisterScreen extends StatelessWidget {
           navigateOnTap: () {
             Navigator.pushReplacementNamed(context, RouteNames.loginScreen);
           },
-          textButtonTitle: "Sign up"),
+          textButtonTitle: "Sign in"),
     );
   }
 }

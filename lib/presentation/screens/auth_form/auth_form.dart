@@ -1,7 +1,9 @@
 import 'package:evira_store/core/theme/app_theme.dart';
+import 'package:evira_store/presentation/cubits/register_user_cubit/register_user_cubit.dart';
 import 'package:evira_store/presentation/widgets/custom_button.dart';
 import 'package:evira_store/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AuthForm extends StatelessWidget {
@@ -94,7 +96,9 @@ class AuthForm extends StatelessWidget {
             const SizedBox(height: 30),
             InkWell(
               borderRadius: BorderRadius.circular(16),
-              onTap: () {},
+              onTap: () {
+                context.read<RegisterUserCubit>().createUserWithGoogle();
+              },
               child: Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
