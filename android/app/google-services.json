@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "562285104768-ka7rknohsknsq683lbc6nv1kdc48j744.apps.googleusercontent.com",
+          "client_id": "562285104768-utusj4atpvid6gms8h434jq045k88uq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.evira_store",
+            "certificate_hash": "dacf892ae49306710f609051b274f3de1f98b489"
+          }
+        },
+        {
+          "client_id": "562285104768-794c0766q2muijm3v16sj3n7d7qis1m2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "562285104768-ka7rknohsknsq683lbc6nv1kdc48j744.apps.googleusercontent.com",
+              "client_id": "562285104768-794c0766q2muijm3v16sj3n7d7qis1m2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "562285104768-3oqbp4m6n9cgch4lhfi1uf2a7vgaei1j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eviraStore"
+              }
             }
           ]
         }
