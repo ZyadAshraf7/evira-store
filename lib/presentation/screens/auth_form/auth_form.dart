@@ -97,35 +97,28 @@ class AuthForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            Row(
-              children: [
-                TextButton(onPressed: () {
-                  context.read<RegisterUserCubit>().logoutFromGoogle();
-                }, child: Text("logout")),
-                BlocListener<RegisterUserCubit, RegisterUserState>(
-                  listener: (context, state)async {
-                    if(state is UserGoogleDone){
-                      await context.read<GetUserInfoCubit>().getUserInfo();
-                      Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
-                    }
-                  },
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(16),
-                    onTap: () {
-                      context.read<RegisterUserCubit>().createUserWithGoogle();
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: AppTheme.grey200,
-                          ),
-                          borderRadius: BorderRadius.circular(16)),
-                      child: SvgPicture.asset("assets/icons/google.svg"),
-                    ),
-                  ),
+            BlocListener<RegisterUserCubit, RegisterUserState>(
+              listener: (context, state)async {
+                if(state is UserGoogleDone){
+                  await context.read<GetUserInfoCubit>().getUserInfo();
+                  Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);
+                }
+              },
+              child: InkWell(
+                borderRadius: BorderRadius.circular(16),
+                onTap: () {
+                  context.read<RegisterUserCubit>().createUserWithGoogle();
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppTheme.grey200,
+                      ),
+                      borderRadius: BorderRadius.circular(16)),
+                  child: SvgPicture.asset("assets/icons/google.svg"),
                 ),
-              ],
+              ),
             ),
             const SizedBox(height: 50),
             Row(

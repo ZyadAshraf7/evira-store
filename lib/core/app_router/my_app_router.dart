@@ -82,6 +82,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => OrderDetailsScreen(order: settings.arguments as OrderModel),settings: settings);
       case RouteNames.helpCenterScreen:
         return MaterialPageRoute(builder: (_) => const HelpCenterScreen());
+      case RouteNames.categoryProductsScreen:
+        return MaterialPageRoute(builder: (_) => const HelpCenterScreen());
     }
     return null;
   }
