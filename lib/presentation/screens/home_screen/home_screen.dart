@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../data/repositories/localhost_test.dart';
+import '../../../data/repositories/get_home_categories_repository/get_home_categories_repository.dart';
 import 'widgets/category_circle.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -70,7 +70,9 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CategoryCircle(iconPath: "assets/icons/clothes.svg",title: "Clothes",onTap: (){}),
+                  CategoryCircle(iconPath: "assets/icons/clothes.svg",title: "Clothes",onTap: (){
+
+                  }),
                   CategoryCircle(iconPath: "assets/icons/shoes.svg",title: "Shoes",onTap: (){}),
                   CategoryCircle(iconPath: "assets/icons/Bag_selected.svg",title: "Bags",onTap: (){}),
                   CategoryCircle(iconPath: "assets/icons/electronics.svg",title: "Electronics",onTap: (){}),

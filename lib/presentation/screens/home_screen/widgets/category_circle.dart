@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/app_router/route_names.dart';
 import '../../../../core/theme/app_theme.dart';
 
 class CategoryCircle extends StatelessWidget {
@@ -15,7 +16,9 @@ class CategoryCircle extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          onTap: onTap,
+          onTap: (){
+            Navigator.of(context).pushNamed(RouteNames.categoryProductsScreen,arguments: title.toLowerCase());
+          },
           child: Container(
               padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(
