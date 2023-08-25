@@ -33,6 +33,9 @@ class AppTheme {
   static final appTheme = ThemeData(
       fontFamily: 'Urbanist',
       scaffoldBackgroundColor: Colors.white,
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+        secondary: grey500, // Your accent color
+      ),
       textSelectionTheme: const TextSelectionThemeData(cursorColor: grey900),
       appBarTheme: const AppBarTheme(
         iconTheme: IconThemeData(

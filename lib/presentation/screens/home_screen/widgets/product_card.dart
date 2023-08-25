@@ -26,12 +26,15 @@ class _ProductCardState extends State<ProductCard> {
           child: Stack(
             alignment: Alignment.topRight,
             children: [
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    widget.product.image ?? "",
-                    fit: BoxFit.cover,
-                  )),
+              Hero(
+                tag: widget.product.id.toString(),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      widget.product.image ?? "",
+                      fit: BoxFit.cover,
+                    )),
+              ),
               Positioned(
                 right: 8,
                 top: 8,

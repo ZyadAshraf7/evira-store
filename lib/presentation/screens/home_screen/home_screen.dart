@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             }
           },
         ),
-        const SizedBox(height: 24),
+        /*const SizedBox(height: 24),
         GestureDetector(
           onTap: () async {
             Navigator.of(context).pushNamed(RouteNames.searchScreen);
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        ),*/
         const SizedBox(height: 24),
         Center(
           child: Column(

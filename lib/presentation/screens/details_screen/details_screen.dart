@@ -45,7 +45,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   icon: const Icon(Icons.arrow_back),
                 ),
               ),
-              Image.network(widget.product.image!),
+              Hero(tag: widget.product.id.toString(),child: Image.network(widget.product.image!)),
               const SizedBox(height:24),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
