@@ -23,7 +23,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
     context.read<CategoryProductCubit>().getCategoryProduct(widget.title.toLowerCase());
   }
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // finish data agthering
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
