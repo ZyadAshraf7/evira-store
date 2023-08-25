@@ -14,6 +14,7 @@ class CategoryProductCubit extends Cubit<CategoryProductState> {
   Future <void>getCategoryProduct(String category)async{
 
     try{
+      categoryProducts.clear();
       emit(CategoryProductLoading());
       final dataResponse = await repository.fetchHomeCategories(category);
       categoryProducts = dataResponse.map((e) => Product.fromJson(e)).toList();
