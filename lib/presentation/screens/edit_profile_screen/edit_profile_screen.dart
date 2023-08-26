@@ -1,4 +1,5 @@
 import 'package:evira_store/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
+import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:evira_store/presentation/widgets/custom_button.dart';
 import 'package:evira_store/presentation/widgets/custom_text_field.dart';
 import 'package:evira_store/presentation/widgets/loading_spinner.dart';
@@ -35,9 +36,7 @@ class EditProfileScreen extends StatelessWidget {
       body: BlocListener<EditProfileCubit, EditProfileState>(
         listener: (context, state) {
           if (state is EditProfileDone) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(
-              "Profile Updated Successfully"
-            )));
+
           }
         },
         child: Center(
@@ -91,8 +90,7 @@ class EditProfileScreen extends StatelessWidget {
                     iconPath: "assets/icons/Call_stroke.svg",
                     obsecure: false,
                     validator: (_) =>
-                        cubit
-                            .validatePhoneNumber(
+                        cubit.validatePhoneNumber(
                             cubit.phoneNumberController.text),
                   ),
                   const SizedBox(height: 50),
@@ -106,11 +104,18 @@ class EditProfileScreen extends StatelessWidget {
                           return Expanded(
                               child: CustomButton(
                                   onTap: () {
-                                    if (cubit.editProfileFormKey.currentState!
-                                        .validate()) {}
-                                    cubit.editProfile();
+                                    if (cubit.editProfileFormKey.currentState!.validate()) {
+                                      cubit.editProfile().then((value){
+                                        context.read<GetUserInfoCubit>().getUserInfo();
+                                      }).then((value){
+                                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(
+                                            "Profile Updated Successfully"
+                                        )));
+                                      });
+                                    }
                                   },
-                                  title: "Update"));
+                                  title: "Update"),
+                          );
                         },
                       )
                     ],

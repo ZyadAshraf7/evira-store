@@ -17,9 +17,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final editProfileFormKey = GlobalKey<FormState>();
 
-  editProfile()async{
+  Future<void>editProfile()async{
     try {
-      if (passwordConfirmController.text.isNotEmpty) {
         emit(EditProfileLoading());
         _firestore.collection('users')
             .doc(UserPreferences.getUserEmail())
@@ -32,7 +31,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         print("password ${passwordConfirmController.text}");
         await changePassword(passwordConfirmController.text);
         emit(EditProfileDone());
-      }
+
     }catch(e){
       print("error in cubitttt");
       print(e.toString());
@@ -60,14 +59,19 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     return null;
   }
   String? validateConfirmPassword(String? password,String? confirmPassword) {
-    if (password !=confirmPassword && (confirmPassword!=null || confirmPassword!.isNotEmpty)) {
-      return "Passwords don't match";
+    if(confirmPassword != null ) {
+      if (confirmPassword.isNotEmpty && confirmPassword != password) {
+        return "Passwords don't match";
+      }
     }
     return null;
   }
   String? validatePhoneNumber(String? value) {
     if (value == null || value.isEmpty) {
       return 'Phone Number is required';
+    }
+    else if (value.length!=11){
+      return "Phone Number should be 11 digits";
     }
     return null;
   }

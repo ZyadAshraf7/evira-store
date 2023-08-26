@@ -1,8 +1,10 @@
 import 'package:evira_store/core/app_router/route_names.dart';
 import 'package:evira_store/data/models/Order.dart';
 import 'package:evira_store/data/models/product.dart';
+import 'package:evira_store/data/models/user.dart';
 import 'package:evira_store/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:evira_store/presentation/cubits/category_products_cubit/category_product_cubit.dart';
+import 'package:evira_store/presentation/cubits/edit_profile_cubit/edit_profile_cubit.dart';
 import 'package:evira_store/presentation/cubits/favourite_products_cubit/favourite_products_cubit.dart';
 import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:evira_store/presentation/cubits/home_cubit/home_cubit.dart';
@@ -14,6 +16,7 @@ import 'package:evira_store/presentation/screens/bottom_navbar_screen/bottom_nav
 import 'package:evira_store/presentation/screens/cart_screen/cart_screen.dart';
 import 'package:evira_store/presentation/screens/cart_screen/checkout_screen.dart';
 import 'package:evira_store/presentation/screens/details_screen/details_screen.dart';
+import 'package:evira_store/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:evira_store/presentation/screens/favourite_products_screen/favourite_products_screen.dart';
 import 'package:evira_store/presentation/screens/help_center/help_center_screen.dart';
 import 'package:evira_store/presentation/screens/home_screen/categories_products_screen.dart';
@@ -88,6 +91,11 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) =>  BlocProvider(
           create: (context) => CategoryProductCubit(),
           child: CategoryProductsScreen(title: settings.arguments as String),
+        ),settings: settings);
+      case RouteNames.editProfileScreen:
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+          create: (context) => EditProfileCubit(),
+          child: EditProfileScreen(user: settings.arguments as UserModel),
         ),settings: settings);
     }
     return null;

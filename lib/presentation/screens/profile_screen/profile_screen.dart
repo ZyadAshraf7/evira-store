@@ -63,8 +63,8 @@ class ProfileScreen extends StatelessWidget {
                     )
                   ],
                 );
-  },
-),
+                  },
+                ),
                 const SizedBox(height: 12),
                 Text(BlocProvider.of<GetUserInfoCubit>(context).currentUser.name ?? "",
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppTheme.grey900)
@@ -72,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 40),
                 ListTile(
                   onTap: () {
-                    // context.push(context.namedLocation(RouteNames.editProfileScreen),extra: user);
+                    Navigator.of(context).pushNamed(RouteNames.editProfileScreen,arguments: BlocProvider.of<GetUserInfoCubit>(context).currentUser);
                   },
                   leading: SvgPicture.asset(
                     "assets/icons/Profile_unselected.svg",
