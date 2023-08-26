@@ -91,7 +91,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: TextFormField(
                         onFieldSubmitted: (v){
                           setState(() {
-                            bool valid = promoCodes.containsKey(promoController.text);
+                            bool valid = promoCodes.containsKey(promoController.text.toLowerCase());
                             if(valid){
                               validPromoCode = true;
                               double? percent = promoCodes[promoController.text];
