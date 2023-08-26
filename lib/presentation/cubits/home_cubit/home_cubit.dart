@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evira_store/data/repositories/get_category_products/get_category_products_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
-
+import '../../../data/models/special_offer.dart';
 import '../../../data/models/product.dart';
 import '../../../data/repositories/get_all_products_with_limit/get_all_products_with_limit.dart';
 import '../../../data/shared_preference/user_preference.dart';
@@ -77,7 +77,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   PageController pageController = PageController();
   int index = 0;
-
+  List<SpecialOffer> specialOffers = [
+    SpecialOffer(title: "30%",subtitle: "Today’s Special!",content: "Get discount for every order, only valid for today", imagePath: 'assets/images/offer1.png'),
+    SpecialOffer(title: "25%",subtitle: "Weekends Deals",content: "Get discount for every order, only valid for today", imagePath: 'assets/images/offer2.png'),
+    SpecialOffer(title: "40%",subtitle: "New Arrivals",content: "Get discount for every order, only valid for today", imagePath: 'assets/images/offer3.png'),
+    SpecialOffer(title: "20%",subtitle: "Black Friday",content: "Get discount for every order, only valid for today", imagePath: 'assets/images/offer4.png')
+  ];
   void specialOfferChanged(int page) {
     index = page;
     emit(SpecialOfferChanged());
