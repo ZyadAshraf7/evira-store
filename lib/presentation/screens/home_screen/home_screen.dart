@@ -22,11 +22,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<HomeCubit>(context);
+    // final cubit = BlocProvider.of<HomeCubit>(context);
+    print("BUILD AGAIN..");
     return Scaffold(
         body: ListView(
-      // crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+        children: [
         BlocBuilder<GetUserInfoCubit, GetUserInfoState>(
           builder: (context, state) {
             if (state is GetUserInfoLoading) {
@@ -36,35 +36,8 @@ class HomeScreen extends StatelessWidget {
             }
           },
         ),
-        /*const SizedBox(height: 24),
-        GestureDetector(
-          onTap: () async {
-            Navigator.of(context).pushNamed(RouteNames.searchScreen);
-          },
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 24),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-            decoration: BoxDecoration(
-              color: AppTheme.grey200,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset("assets/icons/Search.svg"),
-                    const SizedBox(width: 12),
-                    Text("Search",
-                        style: AppTheme.bodyMediumRegular
-                            .copyWith(color: AppTheme.grey500))
-                  ],
-                ),
-                SvgPicture.asset("assets/icons/Filter.svg"),
-              ],
-            ),
-          ),
-        ),*/
+        // const SizedBox(height: 24),
+        // SearchBox(),
         const SizedBox(height: 24),
         const SpecialOffersBox(),
         const SizedBox(height: 24),
@@ -91,15 +64,15 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, i) {
                   return GestureDetector(
                     onTap: () {
-                      cubit.selectCategory(i);
+                      BlocProvider.of<HomeCubit>(context,listen: false).selectCategory(i);
                     },
                     child: CategoriesBox(
-                      isSelected: cubit.selectedCategory == i,
-                      title: cubit.categoriesList[i],
+                      isSelected: BlocProvider.of<HomeCubit>(context).selectedCategory == i,
+                      title: BlocProvider.of<HomeCubit>(context).categoriesList[i],
                     ),
                   );
                 },
-                itemCount: cubit.categoriesList.length,
+                itemCount: BlocProvider.of<HomeCubit>(context).categoriesList.length,
               ),
             );
           },
@@ -110,12 +83,10 @@ class HomeScreen extends StatelessWidget {
             if (state is GetAllProductsWithLimitsLoading || state is SelectCategoryLoading ) {
               return loadingSpinner();
             }
-            /*if (state is GetAllProductsWithLimitsDone || state is SelectCategoryDone) {
-              return GetAllProductsBox(cubit: cubit);
-            }*/else if (state is GetAllProductsWithLimitsFailed || state is SelectCategoryFailed){
-              return const Text("Somthing Went Wrong");
+            else if (state is GetAllProductsWithLimitsFailed || state is SelectCategoryFailed){
+              return const Center(child: Text("Somthing Went Wrong"));
             }else{
-              return GetAllProductsBox(productsList:cubit.allProducts);
+              return GetAllProductsBox(productsList:BlocProvider.of<HomeCubit>(context).allProducts);
             }
           },
         )
@@ -123,6 +94,3 @@ class HomeScreen extends StatelessWidget {
     ));
   }
 }
-
-
-
