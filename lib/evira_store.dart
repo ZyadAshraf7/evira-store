@@ -50,7 +50,7 @@ class EviraStore extends StatelessWidget {
           onGenerateRoute: appRouter!.onGenerateRoutes,
           initialRoute: UserPreferences.getUserToken() != ''
                 ? RouteNames.bottomNavBarScreen
-                : RouteNames.loginScreen,
+                : RouteNames.onboardingScreen,
             // initialRoute:RouteNames.bottomNavBarScreen,
         ),
       ),

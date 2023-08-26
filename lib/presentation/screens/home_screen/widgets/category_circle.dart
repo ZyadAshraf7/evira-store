@@ -6,11 +6,10 @@ import '../../../../core/theme/app_theme.dart';
 
 class CategoryCircle extends StatelessWidget {
   const CategoryCircle({
-    super.key, required this.iconPath, required this.title, this.onTap,
+    super.key, required this.iconPath, required this.title,
   });
   final String iconPath;
   final String title;
-  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Column(
