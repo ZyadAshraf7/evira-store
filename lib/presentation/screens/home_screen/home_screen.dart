@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../data/repositories/get_home_categories_repository/get_home_categories_repository.dart';
+import 'widgets/categories_circles_box.dart';
 import 'widgets/category_circle.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -65,35 +66,9 @@ class HomeScreen extends StatelessWidget {
           ),
         ),*/
         const SizedBox(height: 24),
-        SpecialOffersBox(),
+        const SpecialOffersBox(),
         const SizedBox(height: 24),
-        Center(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CategoryCircle(iconPath: "assets/icons/clothes.svg",title: "Clothes",onTap: (){
-
-                  }),
-                  CategoryCircle(iconPath: "assets/icons/shoes.svg",title: "Shoes",onTap: (){}),
-                  CategoryCircle(iconPath: "assets/icons/Bag_selected.svg",title: "Bags",onTap: (){}),
-                  CategoryCircle(iconPath: "assets/icons/electronics.svg",title: "Electronics",onTap: (){}),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CategoryCircle(iconPath: "assets/icons/watches.svg",title: "Watches",onTap: (){}),
-                  CategoryCircle(iconPath: "assets/icons/jewelery.svg",title: "Jewelry",onTap: (){}),
-                  CategoryCircle(iconPath: "assets/icons/kitchen.svg",title: "Kitchen",onTap: (){}),
-                  CategoryCircle(iconPath: "assets/icons/toys.svg",title: "Toys",onTap: (){}),
-                ],
-              ),
-            ],
-          ),
-        ),
+        const CategoriesCirclesBox(),
         const SizedBox(height: 30),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -138,7 +113,7 @@ class HomeScreen extends StatelessWidget {
             /*if (state is GetAllProductsWithLimitsDone || state is SelectCategoryDone) {
               return GetAllProductsBox(cubit: cubit);
             }*/else if (state is GetAllProductsWithLimitsFailed || state is SelectCategoryFailed){
-              return Text("Somthing Went Wrong");
+              return const Text("Somthing Went Wrong");
             }else{
               return GetAllProductsBox(productsList:cubit.allProducts);
             }
@@ -148,5 +123,6 @@ class HomeScreen extends StatelessWidget {
     ));
   }
 }
+
 
 
