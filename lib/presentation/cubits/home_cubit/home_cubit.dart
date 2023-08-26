@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evira_store/data/repositories/get_category_products/get_category_products_repository.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/models/product.dart';
@@ -72,6 +73,14 @@ class HomeCubit extends Cubit<HomeState> {
       emit(GetAllProductsWithLimitsFailed());
       print(e.toString());
     }
+  }
+
+  PageController pageController = PageController();
+  int index = 0;
+
+  void specialOfferChanged(int page) {
+    index = page;
+    emit(SpecialOfferChanged());
   }
 
 }

@@ -5,6 +5,7 @@ import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubi
 import 'package:evira_store/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:evira_store/presentation/screens/home_screen/widgets/categories_box.dart';
 import 'package:evira_store/presentation/screens/home_screen/widgets/get_all_products_box.dart';
+import 'package:evira_store/presentation/screens/home_screen/widgets/special_offers_box.dart';
 import 'package:evira_store/presentation/screens/home_screen/widgets/user_information_box.dart';
 import 'package:evira_store/presentation/widgets/loading_spinner.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -63,6 +64,8 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),*/
+        const SizedBox(height: 24),
+        SpecialOffersBox(),
         const SizedBox(height: 24),
         Center(
           child: Column(
