@@ -2,8 +2,6 @@
 
 ## E-Commerce App with Full Features & Details
 
-## Getting Started
-
 * Wishlist, Shopping Cart,Order/Checkout&Shipping.
 * Onboarding, sign up, sign in, Reset Password, Account Setup,Notification, Address, Customer Support& More.
 * Application is developed using bloc statemanagement and Firebase as a backend.
