@@ -28,10 +28,10 @@ class RegisterScreen extends StatelessWidget {
           onTap: () {
             if (cubit.formKey.currentState!.validate()) {
               print("valid");
-             /* context.goNamed(RouteNames.completeUserRegisterScreen, queryParams: {
+              Navigator.of(context).pushNamed(RouteNames.completeUserRegisterScreen,arguments: {
                 'email': cubit.emailController.text,
                 'password': cubit.passwordController.text
-              });*/
+              });
               // cubit.createNewUser(user);
             }
           },

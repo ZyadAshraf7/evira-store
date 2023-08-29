@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evira_store/core/app_router/route_names.dart';
 import 'package:evira_store/data/models/user.dart';
+import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:evira_store/presentation/cubits/register_user_cubit/register_user_cubit.dart';
 import 'package:evira_store/presentation/widgets/custom_alert_dialog.dart';
 import 'package:evira_store/presentation/widgets/custom_button.dart';
@@ -12,16 +13,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CompleteUserRegister extends StatelessWidget {
   const CompleteUserRegister(
-      {Key? key, required this.email, required this.password})
+      {Key? key, this.userMap,})
       : super(key: key);
 
-  final String email;
-  final String password;
+  final Map<String,dynamic> ? userMap;
 
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<RegisterUserCubit>(context);
-    print(email);
+    String email = userMap?['email'];
+    String password = userMap?['password'];
+    // print(email);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -128,7 +130,9 @@ class CompleteUserRegister extends StatelessWidget {
                                               "Your account is ready to use. You will be redirected to the Home page in a few seconds..",
                                           imagePath:
                                               "assets/images/Group1.png"),
-                                    );
+                                    ).then((value){
+                                      context.read<GetUserInfoCubit>().getUserInfo();
+                                    });
                                     await Future.delayed(const Duration(seconds: 4));
                                     // Navigator.of(context).pop();
                                     Navigator.pushReplacementNamed(context, RouteNames.bottomNavBarScreen);

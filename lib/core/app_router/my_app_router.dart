@@ -10,6 +10,7 @@ import 'package:evira_store/presentation/cubits/get_user_info/get_user_info_cubi
 import 'package:evira_store/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:evira_store/presentation/cubits/onboarding_screens/onboarding_cubit.dart';
 import 'package:evira_store/presentation/cubits/search_product_cubit/search_product_cubit.dart';
+import 'package:evira_store/presentation/screens/auth_form/complete_user_register.dart';
 import 'package:evira_store/presentation/screens/auth_form/login_screen.dart';
 import 'package:evira_store/presentation/screens/auth_form/register_screen.dart';
 import 'package:evira_store/presentation/screens/bottom_navbar_screen/bottom_navbar_screen.dart';
@@ -58,6 +59,8 @@ class AppRouter {
                 ));
       case RouteNames.detailsScreen:
         return MaterialPageRoute(builder: (_) => DetailsScreen(product: settings.arguments as Product),settings: settings);
+      case RouteNames.completeUserRegisterScreen:
+        return MaterialPageRoute(builder: (_) => CompleteUserRegister(userMap: settings.arguments as Map<String,dynamic>),settings: settings);
       case RouteNames.favouriteProductsScreen:
         return MaterialPageRoute(builder: (_) =>  MultiBlocProvider(
           providers:[

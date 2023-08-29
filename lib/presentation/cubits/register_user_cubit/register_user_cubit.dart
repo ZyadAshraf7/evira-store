@@ -40,6 +40,7 @@ class RegisterUserCubit extends Cubit<RegisterUserState> {
       if(data["idToken"]!= null){
         final token =data["idToken"];
         UserPreferences.setUserToken(token);
+        UserPreferences.setUserEmail(user.email??"");
         final response = await FirebaseFirestore.instance.collection("users").doc(user.email).set(user.toJson());
         print("response done");
         print("Create User Success");
