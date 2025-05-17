@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB8RAvAvBv5qYJ0wCcMnlO5nDuozZZT-bw',
-    appId: '1:562285104768:android:cded395a095a7d7c8da065',
+    apiKey: '',
+    appId: '',
     messagingSenderId: '562285104768',
     projectId: 'evira-store',
     storageBucket: 'evira-store.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDSyyC7MukTf4AD93RDYsTpGoR2Yn0_R68',
-    appId: '1:562285104768:ios:569560a108b4aa268da065',
+    apiKey: '',
+    appId: '',
     messagingSenderId: '562285104768',
     projectId: 'evira-store',
     storageBucket: 'evira-store.appspot.com',
-    iosClientId: '562285104768-3oqbp4m6n9cgch4lhfi1uf2a7vgaei1j.apps.googleusercontent.com',
+    iosClientId: '',
     iosBundleId: 'com.example.eviraStore',
   );
 }
