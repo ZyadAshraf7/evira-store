@@ -15,7 +15,7 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   // await tz.initializeTimeZone();
   await SharedPrefs.init();
-  Stripe.publishableKey = "pk_test_51NPMtgKVE8E7TjeM1EbACOEPMCCS7LFiebwOrjVm90MvsUo8OSHj6JU62hLfx7773kEszj5pqaLW7usXSzyDqUWK00XpL3bJTm";
+  Stripe.publishableKey = "";
   // await dotenv.load(fileName: "assets/.env");
   // await Stripe.instance.applySettings();
   await Firebase.initializeApp(
